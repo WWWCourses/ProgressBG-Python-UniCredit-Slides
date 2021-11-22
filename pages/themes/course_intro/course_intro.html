@@ -284,13 +284,21 @@
 
 <section><h1>Write Python in VS Code</h1></section>
 <section><h2>Write Python in VS Code</h2>
-	<section><h3>Extensions</h3>
+	<section><h3>VSCode intro</h3>
+		<dl class="fa">
+			<dt><a href="https://code.visualstudio.com/docs/getstarted/userinterface">User Interface</a></dt>
+			<dt><a href="https://code.visualstudio.com/docs/getstarted/themes">Color Themes</a></dt>
+			<dt><a href="https://code.visualstudio.com/docs/introvideos/extend">Using extensions in Visual Studio Code</a></dt>
+		</dl>
+	</section>
+	<section><h3>Useful Extensions</h3>
 		<dl class="fa">
 			<dt><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python Extension from Microsoft</a></dt>
 			<dt><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance Exception from Microsoft</a></dt>
 		</dl>
 	</section>
 	<section><h3>Useful Keyboard Shortcuts</h3>
+		<p class="note">Command Palette gives you access to all VS commands in the given context.</p>
 		<table>
 			<tr>
 				<th>Keys</th><th>Action</th>
@@ -309,10 +317,22 @@
 			</tr>
 			<tr><td><kbd>ctrl+l</kbd></td><td>While in terminal will clear the output</td></tr>
 		</table>
-		<p class="note">Command Palette gives you access to all VS commands in the given context.</p>
 		<!-- <dl class="fa">
 			<dt>More on using VS Code with Python: <a href="https://code.visualstudio.com/docs/languages/python">Python in Visual Studio Code</a></dt>
 		</dl> -->
+		<dl class="fa">
+			<dt><a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_keyboard-reference-sheets">keyboard shortcut reference sheet for your platform (macOS, Windows, Linux).</a></dt>
+		</dl>
+	</section>
+	<section><h3>VSCode Workspace</h3>
+		<dl class="fa">
+			<dt>A Visual Studio Code "workspace" is the collection of one or more folders that are opened in a VS Code window (instance).</dt>
+			<dt>The concept of a workspace enables VS Code to:</dt>
+			<dd>Configure settings that only apply to a specific folder or folders but not others.</dd>
+			<dd>Store and restore UI state associated with that workspace (for example, the files that are opened).</dd>
+			<dd>Selectively enable or disable extensions only for that workspace.</dd>
+			<dd>Persist task and debugger launch configurations that are only valid in the context of that workspace.</dd>
+		</dl>
 	</section>
 	<section><h3>Prepare your Workspace</h3>
 		<dl class="fa">
@@ -320,9 +340,9 @@
 			<dt>Open vscode.</dt>
 			<dt>Select "Add folder" and choose the folder you've made.</dt>
 			<dt>In the sidebar, the "Explorer" will show your folder.</dt>
-			<dt>Save your workspace (you can use the same name as the project)</dt>
-			<dd>Menu=>File=>save Workspace As...</dd>
-			<dd><kbd>CTRL+SHIFT+P</kbd>=>save Workspace As...</dd>
+			<!-- <dt>Save your workspace (you can use the same name as the project)</dt> -->
+			<!-- <dd>Menu=>File=>save Workspace As...</dd> -->
+			<!-- <dd><kbd>CTRL+SHIFT+P</kbd>=>save Workspace As...</dd> -->
 		</dl>
 	</section>
 	<section><h3>Prepare your Workspace - demo</h3>
@@ -351,6 +371,12 @@
 		<dl class="fa">
 			<dt>A terminal panel should be opened in your editor showing the python script execution and its output:</dt>
 			<a href="images/vsCode/CreateAndExecutePythohnFile.gif"><img src="images/vsCode/CreateAndExecutePythohnFile.gif"></a>
+		</dl>
+	</section>
+	<section><h3>Setup 'Run with Python' Task</h3>
+		<dl class="fa">
+			<dt><a href="https://code.visualstudio.com/docs/editor/tasks">tasks @vscode</a></dt>
+			<script src="https://gist.github.com/WWWCourses/b0dcd6c2f052ae19a79006e496aa53e6.js"></script>
 		</dl>
 	</section>
 	<section><h3>Select Python version</h3>
