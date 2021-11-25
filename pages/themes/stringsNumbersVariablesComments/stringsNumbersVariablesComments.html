@@ -586,19 +586,22 @@
 	<h1>Exercises</h1>
 </section>
 <section><h2><b>Academical to Astronomical hours converter</b></h2>
-	<section><h3>The problem</h3>
+	<section><h3>The task</h3>
 		<dl class="fa">
 			<dt>Given that:</dt>
 			<dd>An astronomical hour consists of 60 minutes</dd>
 			<dd>An academical hour consists of 40 minutes</dd>
-			<dd>For each 4 academical hours there are 20 minutes brake</dd>
+			<dd>For each 3 academical hours there are 15 minutes brake</dd>
 			<dt>Write a Python program, that will print out how many astronomical hours a python course should take, if it consists of 64 academical hours, including the respective brakes</dt>
+			<dt>Try to think of a solution, which will be readable enough and easy to maintain in future</dt>
+			<dt>Write your code in <code>HW/acad_to_astro_hours.py</code> file</dt>
 		</dl>
-		<pre><code rel="Output" class="shell">
-			48.0
-		</code></pre>
+		<!-- <hr> -->
+		<!-- <pre><code rel="Expected Output" class="shell">
+			Total course astronomical hours are: 48.0
+		</code></pre> -->
 	</section>
-	<section><h3>solution - without variables</h3>
+	<!-- <section><h3>solution - without variables</h3>
 		<pre><code rel="Python" class="python3">
 			"""
 			acad_to_astro_hours.py
@@ -606,10 +609,9 @@
 			Solution without using variables to store values
 			"""
 
-			print((64*40 + 64/4*20)/60)
+			print((64*40 + 64/3*15)/60)
 		</code></pre>
 	</section>
-
 	<section><h3>solution: too many variables</h3>
 		<pre><code rel="Python" class="python3">
 			"""
@@ -619,50 +621,39 @@
 			"""
 
 			# given:
+			# variables declaration
 			minutes_in_astro_hour = 60
 			minutes_in_acad_hour = 40
-			acad_course_hours = 64
-			acad_hours_in_a_partida = 4
+			course_total_acad_hours = 64
+			acad_hours_in_a_day = 3
+			minutes_in_break = 15
 
 			# program logic:
-			acad_hours_partidas = acad_course_hours/acad_hours_in_a_partida
+			course_days = course_total_acad_hours/acad_hours_in_a_day
+			total_breaks_minutes = course_days * minutes_in_break
 
-			total_minutes_brakes = acad_hours_partidas * 20
+			total_course_minutes = course_total_acad_hours * minutes_in_acad_hour + total_breaks_minutes
+			total_course_astro_hours = total_course_minutes / minutes_in_astro_hour
 
-			minutes_in_a_course = acad_course_hours * minutes_in_acad_hour + total_minutes_brakes
-
-			course_in_astro_hours = minutes_in_a_course / 60
-
-			print(course_in_astro_hours)
-
-
-
-
+			print(f'Total course astronomical hours are: {total_course_astro_hours}')
 		</code></pre>
-	</section>
-
-	<section><h3>HW:acad_to_astro_hours</h3>
-		<dl class="fa">
-			<dt>Write your solution, using your logic and your variables names.</dt>
-			<dt>Try to think of a solution, which will be readable enough (# you can use comments) and easy to maintain in future</dt>
-			<dt>write your code in a file, named &lt;prefix&gt;_acad_to_astro_hours.py</dt>
-			<dd>where &lt;prefix&gt; is your name initials</dd>
-			<dd>For instance: <b>iep_acad_to_astro_hours.py</b></dd>
-			<dt>send it to <a href="mailto:progressbg.python.course@gmail.com?Subject=HW:acad_to_astro_hours">progressbg.python.course@gmail.com</a></dt>
-		</dl>
-	</section>
+	</section> -->
 </section>
 
 <section id="hw_bmi"><h2><b>Body Mass Index calculator</b></h2>
 	<section><h3>The problem</h3>
-		<dl class="fa">
+		<dl class="fa" style="font-size: 0.8em;">
 			<dt>Calculate your body mass index (BMI) with Python, given the formula:<br>
 			<code class="note">BMI = W / (H*H)</code><br>
 			where:
 			</dt>
 			<dd>W = weight_in_kilogram</dd>
 			<dd>H = height_in_meters</dd>
-			<dt>Your program should outputs the rounded result (to 2 digits from the decimal point). You can use the python's build-in <a href="https://www.tutorialspoint.com/python/number_round.htm">round()</a> function, like:</dt>
+			<dt>Your program should outputs the result rounded to 2 digits after the decimal point).</dt>
+			<dt>Try to think of a solution, which will be readable enough and easy to maintain in future (you can use comments and semantic variable names)</dt>
+			<dt>write your code in <code>HW/BMI.py</code> file</dt>
+			<hr>
+			<dt><span class="note">Tip</span>: You can use the python's build-in <a href="https://www.tutorialspoint.com/python/number_round.htm">round()</a> function, like:</dt>
 			<pre><code rel="Python" class="python3">
 				>>> round(2.1457, 2)
 				2.15
@@ -675,7 +666,7 @@
 			</code></pre>
 		</dl>
 	</section>
-	<section><h3>solution</h3>
+	<!-- <section><h3>solution</h3>
 		<pre><code rel="Python" class="python3">
 			"""
 			Solution without using variables to store values,
@@ -687,16 +678,15 @@
 			# 19.0
 
 		</code></pre>
-	</section>
-	<section><h3>HW: BMI.py</h3>
-		<dl class="fa">
-			<dt>Try to think of a solution, which will be readable enough and easy to maintain in future (you can use comments and semantic variable names)</dt>
-			<dt>write your code in a file, named &lt;prefix&gt;_BMI.py</dt>
-			<dd>where &lt;prefix&gt; is your name initials</dd>
-			<dd>For instance: <b>iep_BMI.py</b></dd>
-			<dt>send it to <a href="mailto:progressbg.python.course@gmail.com?Subject=HW:BMI">progressbg.python.course@gmail.com</a></dt>
-		</dl>
-	</section>
+	</section> -->
+</section>
+
+<section><h2>HW Submition</h2>
+	<dl class="fa">
+		<dt>You can submit your files either by:</dt>
+		<dd>upload to your Github account</dd>
+		<dd>Or sending as email attachment</dd></dt>
+	</dl>
 </section>
 
 <section class="disclaimer" data-background="/ProgressBG-Python-UniCredit-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
