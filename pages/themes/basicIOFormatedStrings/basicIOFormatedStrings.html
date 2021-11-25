@@ -72,10 +72,12 @@
 	</section>
 </section>
 
+
+<section data-min="5"><h1>Basic IO</h1></section>
 <section><h2>Basic IO - User input</h2>
 	<section><h3>Python3 print() function</h3>
 		<dl class="fa">
-			<dt style="font-size: .8em"><code>print()</code> is used to output <span class="note">text streams</span> to stdout or other text files (working with files will be discussed deeply in next lectures)</dt>
+			<dt style="font-size: .8em"><code>print()</code> is used to output <span class="note">text streams</span> to stdout or text files (working with files will be discussed deeply in next lectures)</dt>
 		</dl>
 		<pre><code rel="Syntax" class="python">
 			print(*objects, sep=' ', end='\n',file=sys.stdout, flush=False)
@@ -135,11 +137,12 @@
 	</section>
 </section>
 
-<section><h2>Formatting strings</h2>
-	<section><h3>Why and How?</h3>
+<section data-min="50"><h1>String Interpolation</h1></section>
+<section><h2>String Interpolation</h2>
+	<section><h3>Before Python 3.6</h3>
 		<dl class="fa">
-			<dt>It is not convenient to use the concatenation operator when we want to display some message and some variables interpolated into it.</dt>
-			<dt>Python <span class="note">do not support variables interpolation in double quoted strings</span> like in bash/Perl/PHP/...</dt>
+			<dt>Before Python 3.6 we have to use the concatenation operator when we want to display some string and some variables interpolated into it.</dt>
+			<dt>Python (before v.3.6)<span class="note">do not support variables interpolation in strings</span> like in bash/Perl/PHP/...</dt>
 			<pre><code rel="Terminal" class="shell">
 				# not possible in Python!!!
 				$name = "Iva";
@@ -148,8 +151,35 @@
 			</code></pre>
 		</dl>
 	</section>
+	<section><h3>Literal String Interpolation (f-strings)</h3>
+		<dl class="fa">
+			<dt>Python 3.6 added "f-strings" which provide a way to embed expressions inside string literals, using a minimal syntax</dt>
+			<pre><code rel="Python" class="python">
+				value = 42
+				# str.format() method:
+				'The value is {}.'.format(value)
+
+				# f-strings:
+				f'The value is {value}'
+			</code></pre>
+			<dt>More on f-strings: </dt>
+			<dd><a href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings">Formatted String Literals</a> @python tutorial</dd>
+			<dd><a href="https://docs.python.org/3/library/string.html#formatstrings">Format String Syntax</a> @python docs</dd>
+		</dl>
+		</section>
+	<section><h3>Examples</h3>
+		<pre><code rel="Python" class="python">
+				user_name = input("hi, what's your name: ")
+				user_surname = input("will you tell me your sur name?:")
+
+				print(f"Nice to meet you, {user_name} {user_surname} !")
+		</code></pre>
+		<p><span class="note">Task:</span> modify the program, such that the user names will be displayed capitalized</p>
+	</section>
 </section>
 
+
+<section data-min="50"><h1>String Formatting</h1></section>
 <section><h2>"old-style" String Formatting in Python</h3>
 	<section><h3>syntax</h3>
 		<pre><code rel="Syntax" class="shell">
@@ -164,7 +194,6 @@
 			<dt><span class="note">values_tuple</span> - the values which will be interpolated into the respective formatting placeholders.</dt>
 			<dt>Reference: <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">printf-style String Formatting</a> @python docs</dt>
 		</dl>
-
 	</section>
 	<section><h3>how it works?</h3>
 		<a href="images/Python_formting_string.png"><img style="height: 40vh" src="images/Python_formting_string.png"></a>
@@ -245,36 +274,6 @@
 			print("| {:10d} | {:10d} |".format(243, 126))
 			print("| {:10s} | {:10s} |".format("=" * 10, "=" * 10))
 		</code></pre>
-	</section>
-	<section><h3>Literal String Interpolation (f-strings)</h3>
-    <dl class="fa">
-      <dt>F-strings provide a way to embed expressions inside string literals, using a minimal syntax</dt>
-      <pre><code rel="Python" class="python">
-        value = 42
-        # str.format() method:
-        'The value is {}.'.format(value)
-
-        # f-strings:
-        f'The value is {value}'
-      </code></pre>
-      <dt>More on f-strings: <a href="https://cito.github.io/blog/f-strings/">The new f-strings in Python 3.6</a></dt>
-    </dl>
-  </section>
-	<section><h3>resources</h3>
-		<dl class="fa">
-			<dt><a href="https://www.programiz.com/python-programming/methods/string/format">Python String format() @programiz.com</a></dt>
-			<dt><a href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings">Formatted String Literals</a> @python tutorial</dt>
-			<dt><a href="https://docs.python.org/3/library/string.html#formatstrings">Format String Syntax</a> @python docs</dt>
-		</dl>
-	</section>
-	<section><h3>examples</h3>
-		<pre><code rel="Python" class="python">
-				user_name = input("hi, what's your name: ")
-				user_surname = input("will you tell me your sur name?:")
-
-				print(f"Nice to meet you, {user_name} {user_surname} !")
-		</code></pre>
-		<p><span class="note">Task:</span> modify the program, such that the user names will be displayed capitalised</p>
 	</section>
 </section>
 
