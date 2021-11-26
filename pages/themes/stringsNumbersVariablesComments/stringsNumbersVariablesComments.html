@@ -250,6 +250,19 @@
 		</code></pre>
 		<p class="note">Python3 adds the "<code>//</code>" operator for Integer division</p>
 	</section>
+	<section><h3>Floating Point Arithmetic: Issues and Limitations</h3>
+		<dl class="fa">
+			<dt>Decimal numbers are represented in binary system.</dt>
+			<dt>Most decimal fractions cannot be represented exactly as binary fractions, which leads to peculiar results</dt>
+			<dt>Reference: <a href="https://docs.python.org/3/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations @python.org</a></dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			print(0.1+0.2)
+
+			# OUTPUT:
+			# 0.30000000000000004
+		</code></pre>
+	</section>
 	<section><h3>the <code>math</code> module</h3>
 		<dl class="fa">
 			<dt>math module is native to every python distribution.</dt>
