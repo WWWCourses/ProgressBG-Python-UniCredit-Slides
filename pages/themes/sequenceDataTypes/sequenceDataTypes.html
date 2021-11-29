@@ -509,7 +509,7 @@
 		</code></pre>
 	</section>
 	<section><h3>Indexing from start to end</h3>
-		<a href="images/Python_List_Indexing_Start_To_End.png"><img src="images/Python_List_Indexing_Start_To_End.png"></a>
+		<a href="images/Python_List_Indexing_Start_To_End.png"><img src="images/Python_List_Indexing_Start_To_End.png"></a><br>
 		<dl class="fa">
 			<dt>First sequence item is with index <b>0</b>.</dt>
 			<dt>Next sequence item indexes increments with 1</dt>
@@ -526,7 +526,7 @@
 			</code></pre>
 	</section>
 	<section><h3>Indexing from end to start</h3>
-		<a href="images/Python_List_Indexing_End_To_Sart.png"><img src="images/Python_List_Indexing_End_To_Sart.png"></a>
+		<a href="images/Python_List_Indexing_End_To_Sart.png"><img src="images/Python_List_Indexing_End_To_Sart.png"></a>brackets
 		<dl class="fa">
 			<dt>Last list item is with index <b>-1</b></dt>
 			<dt>Next sequence item indexes decrements with 1</dt>
@@ -619,53 +619,6 @@
 			>>> str[::-1]
 			'fedcba'
 		</code></pre>
-	</section>
-	<section><h3 class="advanced">Slicing "multi-dimensional" lists</h3>
-		<dl class="fa">
-			<dt>Normal Python lists are single-dimensional, though they can look like multi-dim lists if their elements are lists</dt>
-			<dt>I.e. Python did not support syntax to slice columns from "multi dim" looking list</dt>
-			<pre><code rel="Python" class="python">
-				m = [
-				  [1,2,3],
-				  [4,5,6],
-				  [7,8,9],
-				]
-
-				# trying to slice the second column ([1,5,8]):
-				print(m[:,1])
-				# TypeError: list indices must be integers or slices, not tuple
-			</code></pre>
-		</dl>
-	</section>
-	<section><h3 class="advanced">Slicing multi-dimensional arrays</h3>
-		<dl class="fa">
-			<dt>But the package <a href="http://www.numpy.org/">numpy</a> contains powerful N-dimensional array objects and other numerical operations.
-			</dt>
-			<dt>In order to use it, you need to install it first:</dt>
-			<pre><code rel="Terminal" class="bash">
-				pipenv install numpy
-			</code></pre>
-			<pre><code rel="Python" class="python">
-				import numpy
-
-				# lets create a python list
-				m = [
-				  [1,2,3],
-				  [4,5,6],
-				  [7,8,9],
-				]
-
-				# create a numpy array from that list:
-				arr = numpy.array(m)
-
-				# now we can easily use numpy's multi-dim slicing:
-				print(arr[:,1])
-				#[2 5 8]
-
-				print(type(arr[:,1]))
-				<class 'numpy.ndarray'>
-			</code></pre>
-		</dl>
 	</section>
 </section>
 
@@ -830,6 +783,52 @@
 			# 9
 		</code></pre>
 	</section>
+	<section><h3 class="advanced">Slicing columns from "lists of lists" ?</h3>
+		<dl class="fa">
+			<dt>Python did not support syntax to slice columns from "multi dim" looking list</dt>
+			<pre><code rel="Python" class="python">
+				m = [
+					[1,2,3],
+					[4,5,6],
+					[7,8,9],
+				]
+
+				# trying to slice the second column ([1,5,8]):
+				print(m[:,1])
+				# TypeError: list indices must be integers or slices, not tuple
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3 class="advanced">multi-dimensional arrays</h3>
+		<dl class="fa">
+			<dt>The package <a href="http://www.numpy.org/">numpy</a> contains powerful N-dimensional array objects and other numerical operations (we'll go into it in later topics).
+			</dt>
+			<dt>In order to use it, you need to install it first:</dt>
+			<pre><code rel="Terminal" class="bash">
+				pip install numpy
+			</code></pre>
+			<pre><code rel="Python" class="python">
+				import numpy
+
+				# lets create a python list
+				m = [
+					[1,2,3],
+					[4,5,6],
+					[7,8,9],
+				]
+
+				# create a numpy array from that list:
+				arr = numpy.array(m)
+
+				# now we can easily use numpy's multi-dim slicing:
+				print(arr[:,1])
+				#[2 5 8]
+
+				print(type(arr[:,1]))
+				<class 'numpy.ndarray'>
+			</code></pre>
+		</dl>
+	</section>
 	<section><h3>List of tuples</h3>
 		<pre><code rel="Python" class="python">
 			### create list_of_tuples:
@@ -912,7 +911,7 @@
 	</section>
 </section>
 
-<section><h1>Resources</h1></section>
+<!-- <section><h1>Resources</h1></section>
 <section><h2>Resources</h2>
 	<dl class="fa">
 		<dt><a href="https://www.programiz.com/python-programming/methods/tuple">Python Tuple Methods @programiz.com</a></dt>
@@ -920,7 +919,7 @@
 		<dt><a href="https://www.programiz.com/python-programming/methods/string">Python String Methods @programiz.com</a></dt>
 		<dt class="advanced"><a href="https://docs.python.org/3/tutorial/datastructures.html#tut-morelists">More on Lists @python docs</a></dt>
 	</dl>
-</section>
+</section> -->
 
 <section><h1>Exercises</h1></section>
 <section><h2>Exercises</h2>
@@ -929,7 +928,7 @@
 			<dt>Given are two lists of names:</dt>
 			<dd><code>first_names</code> with items "ivan", "maria", "petar"</dd>
 			<dd><code>sur_names</code> with items "ivanov", "popova", "petrov"</dd>
-			<dt>Write a program which will make a third list: <code>names</code>, which will holds the items from the two l[task_1.py][task_1.py]ist above as given:</dt>
+			<dt>Write a program which will make a third list: <code>names</code>, which will holds the items from the two list above as given:</dt>
 		</dl>
 		<pre><code rel="Output" class="shell" data-noescape>
 			print(names)
@@ -986,7 +985,7 @@
 			Stoyan
 		</code></pre>
 	</section>
-	<section><h3>Task 6 [task_6.py]</h3>
+	<!-- <section><h3>Task 6 [task_6.py]</h3>
 		<p>Given are next list of distances from Sofia:</p>
 		<pre><code rel="Python" class="python">
 			distances_from_sofia = [
@@ -1024,7 +1023,7 @@
 			Nice - 1307
 			Alexandria - 1403
 		</code></pre>
-	</section>
+	</section> -->
 </section>
 
 <section><h3>Submission</h3>
@@ -1066,7 +1065,7 @@
 			history: true,
 			center: true,
 			width: 1920,
-			height: 1280,
+			height: 1080,
 			// Bounds for smallest/largest possible scale to apply to content
 			minScale: .5,
 			maxScale: 1,
