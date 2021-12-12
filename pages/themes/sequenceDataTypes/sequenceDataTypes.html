@@ -80,7 +80,7 @@
 	</section>
 </section>
 
-<section><h1>Sequence Data Types - Overview</h1></section>
+<section id="SequenceDataTypesOverview"><h1>Sequence Data Types - Overview</h1></section>
 <section><h2>Sequence Data Types - Overview</h2>
 	<section><h3>What is a Sequence?</h3>
 		<p>A sequence in Python is a container, storing <span class="note">ordered collection</span>  of objects.</p>
@@ -103,7 +103,7 @@
 			# list:
 			fruits = ["apple", "banana", "strawberry", "banana", "orange"]
 
-			# tupple:
+			# tuple:
 			point3d = (4, 0, 3)
 
 			# range:
@@ -125,7 +125,7 @@
 </section>
 
 
-<section><h1>Lists</h1></section>
+<section id="Lists"><h1>Lists</h1></section>
 <section><h2>Lists</h2>
 	<section><h3>What is a List?</h3>
 		<dl class="fa">
@@ -159,7 +159,7 @@
 	</section>
 	<section><h3>Retrieve item from list</h3>
 		<pre><code rel="Syntax" class="shell" data-noescape>
-			var_name = list_name<b>[</b><i>index</i><b>]</b>
+			item = list_name<b>[</b><i>index</i><b>]</b>
 		</code></pre>
 		<pre><code rel="Python" class="python">
 			### create list:
@@ -177,7 +177,7 @@
 			itemN = fruits[-1]
 			# orange
 		</code></pre>
-		<p style="font-size: 0.8em">We will discuss more indexing operation in <a href="#commonSequenceOperations">Common Sequence Operations</a>.</p>
+		<p style="font-size: 0.8em">We will discuss more indexing operation in <a href="#CommonSequenceOperations">Common Sequence Operations</a>.</p>
 	</section>
 	<section><h3>Change list item</h3>
 		<pre><code rel="Syntax" class="shell" data-noescape>
@@ -200,7 +200,7 @@
 	</section>
 </section>
 
-<section><h1>Tuples</h1></section>
+<section id="Tuples"><h1>Tuples</h1></section>
 <section><h2>Tuples</h2>
 	<section><h3>What is a Tuple?</h3>
 		<dl class="fa">
@@ -214,6 +214,7 @@
 		<dl class="fa">
 			<dt>Tuple literal is denoted by <span class="note">parentheses</span></dt>
 			<dt>Items in the tuple are separated by <span class="note">comma</span></dt>
+			<dt>A <span class="note">single item tuple</span> is created with trailing comma, like <code>(1,)</code></dt>
 		</dl>
 		<pre><code rel="Python" class="python">
 			### create empty tuple:
@@ -222,7 +223,7 @@
 			# ()
 
 			### create tuple with one element - note the trailing comma!
-			#   if you write t = (99), t will be an integer, not tuple
+			#   if you write t = (99), it will be an integer, not tuple
 			t = (99,)
 			print(t)
 			# (99,)
@@ -235,28 +236,19 @@
 	</section>
 	<section><h3>Retrieve item from tuple</h3>
 		<pre><code rel="Syntax" class="shell" data-noescape>
-			var_name = tupple_name<b>[</b><i>index</i><b>]</b>
+			item = tuple_name<b>[</b><i>index</i><b>]</b>
 		</code></pre>
 		<pre><code rel="Python" class="python">
-			### retrieve tuple items
+			# create a tuple
 			address = ('Bulgaria', 'Sofia', 'Nezabravka str', 14)
 
+			# retrieve tuple items
 			country = address[0]
 			town = address[1]
 			street = address[2]
 			street_num = address[3]
 			print(country, town, street, street_num)
 			# Bulgaria Sofia Nezabravka str 14
-		</code></pre>
-	</section>
-	<section><h3>Change tuple? <strong>No Way!</strong></h3>
-		<dl class="fa">
-			<dt class="note">Tuples are immutable and can not be changed!</dt>
-		</dl>
-		<pre><code rel="Python" class="python">
-			### change a tuple item:
-			address[0] = "France"
-			# TypeError: 'tuple' object does not support item assignment
 		</code></pre>
 	</section>
 	<section><h3>Examples</h3>
@@ -270,7 +262,31 @@
 			ada_birth_year = ada_birth_date[2]
 
 			print("Ada is born on {} {} in {}".format(ada_birth_month, ada_birth_day, ada_birth_year))
-			# Ada is born on December 10 in 181
+			# Ada is born on December 10 in 1815
+		</code></pre>
+	</section>
+	<section><h3>Change tuple? <strong>No Way!</strong></h3>
+		<dl class="fa">
+			<dt class="note">Tuples are immutable and can not be changed!</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			### change a tuple item:
+			address[0] = "France"
+			# TypeError: 'tuple' object does not support item assignment
+		</code></pre>
+	</section>
+	<section><h3>Change tuple's mutable value? - yes, you can</h3>
+		<dl class="fa">
+			<dt>Tuple is immutable, but this does not means the we can not reassign it's mutable value, like list</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			t = ([1,2,3],)
+
+			# change third element in the list inside a tuple:
+			t[0][2] = 100
+
+			print(t)
+			#([1, 2, 100],)
 		</code></pre>
 	</section>
 </section>
@@ -288,14 +304,14 @@
 	</section>
 </section>
 
-<section><h1>Range Object</h1></section>
+<section id="RangeObject"><h1>Range Object</h1></section>
 <section><h2>Range Object</h2>
 	<section><h3>What is a Range Object?</h3>
 		<dl class="fa">
 			<dt>The range type represents an <span class="note">immutable sequence of numbers</span>.</dt>
 			<dt>It's used to generate a number sequence, limited between pre-given <b>start</b> and <b>stop</b> integer values.</dt>
 			<dt class="note">It's typical use in Python is with <code>for</code> loops.</dt>
-			<dt>Reference: <a href="https://docs.python.org/3/library/stdtypes.html#ranges">ranges @python3 docs</a></dt>
+			<dt>The advantage of the range type over a regular list or tuple is that a <span class="note">range object will always take the same (small) amount of memory</span>, as it only stores the formula by which the sequence of numbers will be generated </dt>
 		</dl>
 	</section>
 	<section><h3>Syntax</h3>
@@ -304,12 +320,13 @@
 			range(<i>start</i>, <i>stop</i>[, <i>step</i>])
 		</code></pre>
 		<dl class="fa">
+			<dt><em>start</em> is the only required argument, and it denote that <span class="note">range of generated integers will end at <b>stop - 1</b></span></dt>
 			<dt><em>start</em> is optional and if omitted defaults to 0</dt>
 			<dt><em>step</em> is optional and if omitted defaults to 1.</dt>
 			<dt><em>start</em>, <em>stop</em> and <em>step</em> must be integers!</dt>
-			<dt><em>step</em> can't be 0 (or "ValueError" is raised)</dt>
-			<dt>The range of generated integers will end at <b>stop - 1</b>.</dt>
+			<dt><em>step</em> can't be 0 (or "ValueError" is raised), but can be negative integer.</dt>
 			<dt>If the given arguments did not form a sequence, an empty sequence will be returned.</dt>
+			<dt>Reference: <a href="https://docs.python.org/3/library/stdtypes.html#ranges">ranges @python3 docs</a></dt>
 		</dl>
 	</section>
 	<section><h3>Examples</h3>
@@ -333,15 +350,32 @@
 			# incorrect sequence formulae, will return empty sequence
 		</code></pre>
 	</section>
-	<section><h3>Range in for: example 1</h3>
-		<pre><code rel="Python" class="python">
-			### iterate from 0 up to 10, step = 1 (default)
-			for i in range(10):
-			    print(i, end=" ")
-			# 0 1 2 3 4 5 6 7 8 9
-		</code></pre>
+	<section><h3>Print range sequence</h3>
+		<dl class="fa">
+			<dt>Note, that when you just print a range object it will not return the sequence of numbers, but just the formula:</dt>
+			<pre><code rel="Python" class="python">
+				r = range(0, 10, 2)
+				prin
+
+				# range(0, 10, 2)
+			</code></pre>
+			<dt>If you want to print the generated sequence, you can use the builtin <code>list()</code> or <code>tuple()</code> function:</dt>
+			<pre><code rel="Python" class="python">
+				r = range(0, 10, 2)
+				print(list(r))
+
+				# [0, 2, 4, 6, 8]
+			</code></pre>
+			<dt>But the most common way to use the range items is to loop over them:</dt>
+			<pre><code rel="Python" class="python">
+				### iterate from 0 up to 10, step = 1 (default)
+				for i in range(10):
+					print(i, end=" ")
+				# 0 1 2 3 4 5 6 7 8 9
+			</code></pre>
+		</dl>
 	</section>
-	<section><h3>Range in for: example 2</h3>
+	<section><h3>Range in for: example 1</h3>
 		<pre><code rel="Python" class="python">
 			### iterate from 10 up to -1, step = -1
 			for i in range(10,-1, -1):
@@ -349,7 +383,7 @@
 			# 10 9 8 7 6 5 4 3 2 1 0
 		</code></pre>
 	</section>
-	<section><h3>Range in for: example 3</h3>
+	<section><h3>Range in for: example 2</h3>
 		<pre><code rel="Python" class="python">
 			### iterate from 2 up to 10, step = 2
 			for i in range(2, 10, 2):
@@ -357,7 +391,7 @@
 			# 2 4 6 8
 		</code></pre>
 	</section>
-	<section><h3>Range in for: example 4</h3>
+	<section><h3>Range in for: example 3</h3>
 		<pre><code rel="Python" class="python">
 			### iterate from -10 up to 0, step = 2
 			for i in range(-10, 0, 2):
@@ -368,8 +402,8 @@
 </section>
 
 
-<section><h1>Common Sequence Operations</h1></section>
-<section id="commonSequenceOperations"><h2>Common Sequence Operations</h2>
+<section id="CommonSequenceOperations"><h1>Common Sequence Operations</h1></section>
+<section><h2>Common Sequence Operations</h2>
 	<section>
 		<p>Next operation can be used on all sequence types, with the exception that <span class="note">range() objects can not be concatenated or repeated</span> (but the sequences they produced can).</p>
 		<table>
@@ -526,7 +560,7 @@
 			</code></pre>
 	</section>
 	<section><h3>Indexing from end to start</h3>
-		<a href="images/Python_List_Indexing_End_To_Sart.png"><img src="images/Python_List_Indexing_End_To_Sart.png"></a>brackets
+		<a href="images/Python_List_Indexing_End_To_Sart.png"><img src="images/Python_List_Indexing_End_To_Sart.png"></a><br>
 		<dl class="fa">
 			<dt>Last list item is with index <b>-1</b></dt>
 			<dt>Next sequence item indexes decrements with 1</dt>
@@ -563,15 +597,15 @@
 			sliced = <i>sequence</i><b>[</b><i>start</i><b>:</b><i>end</i><b>:</b><i>step</i><b>]</b>
 		</code></pre>
 		<dl class="fa" style="font-size: 0.9em">
-			<dt>Slice a sequence from <i>start</i> to <em>stop</em> with the given <em>step</em></dt>
+			<dt>Slice a sequence from <i>start</i> up to <em>end</em> indexes with the given <em>step</em></dt>
 			<dt><em>start</em>, <em>end</em> and <em>step</em> are optional!</dt>
 			<dt>At least one column (<code>:</code>) is required!</dt>
 		</dl>
 
 		<pre><code rel="Syntax - explanation" class="python">
-			a[start:end] # get items from start through end-1
-			a[start:]    # get items from start through the rest of the array
-			a[:end]      # get items from the beginning through end-1
+			a[start:end] # get items with indexes from start through end-1
+			a[start:]    # get items with indexes from start through the rest of the array
+			a[:end]      # get items with indexes from the beginning through end-1
 			a[:]         # a copy of the whole array
 		</code></pre>
 		<p>Reference: <a href="https://docs.python.org/3/library/functions.html#slice">slice @python docs</a></p>
@@ -622,7 +656,7 @@
 	</section>
 </section>
 
-<section><h1>Loop on sequence</h1></section>
+<section id="LoopOnSequence"><h1>Loop on sequence</h1></section>
 <section><h2>Loop on sequence</h2>
 	<section><h3>Syntax</h3>
 		<pre><code rel="Terminal" class="shell" data-noescape>
@@ -647,7 +681,7 @@
 			    print(item)
 		</code></pre>
 	</section>
-	<section><h3 class="advanced">Loop on indexes of sequence: C-style</h3>
+	<section id="LoopOnIndexesOfSequenceCStyle"><h3>Loop on indexes of sequence: C-style</h3>
 		<dl class="fa">
 			<dt>As we saw, Python doesn't have C-style for loop, but we can emulate it with:</dt>
 		</dl>
@@ -663,8 +697,9 @@
 			2 - a
 			3 - n
 		</code></pre>
+		<p>Note, that this is not the Pythonic way of looping on sequence by index. </p>
 	</section>
-	<section><h3>Loop on indexes of sequence: Pythonic way</h3>
+	<section id="LoopOnIndexesOfSequencePythonicWay"><h3>Loop on indexes of sequence: Pythonic way</h3>
 		<dl class="fa">
 			<dt>To get the index and the item in a <code>for</code> loop, we can also use the <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate()</a> built-in function:</dt>
 		</dl>
@@ -688,7 +723,7 @@
 			<dt>With <code>list()</code> function we can create a list from any sequence:</dt>
 		</dl>
 		<pre><code rel="Python" class="python">
-			### list from tupple:
+			### list from tuple:
 			point3d = (4, 0, 3)
 			point3d_list = list(point3d)
 			print(point3d_list)
@@ -718,7 +753,7 @@
 		</code></pre>
 	</section>
 	<section><h3>Basic List Methods</h3>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 70vh;">
 			### Create list of fruits:
 			fruits = ["apple", "banana", "strawberry"]
 
@@ -758,7 +793,7 @@
 		<dl class="fa">
 			<dt>A list item can be <span class="note">any data type</span>, including list, tuples and so on.</dt>
 		</dl>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 70vh;">
 			### create list of lists:
 			matrix = [
 			    [1,2,3],
@@ -887,7 +922,7 @@
 	<section><h3 class="advanced">Change mutable item inside tuple? <strong>Yes!</strong></h3>
 		<dl class="fa">
 			<dt>Tuple items can not be changed!</dt>
-			<dt>If a tupple item is list - it will always be a list</dt>
+			<dt>If a tuple item is list - it will always be a list</dt>
 			<dt>But, we can change the items <span class="note">inside</span> a list!</dt>
 		</dl>
 	</section>
@@ -904,7 +939,7 @@
 			print(users[0])
 			# ['Ivan', 'Ivanov', 100]
 
-			### try to change a tupple item:
+			### try to change a tuple item:
 			users[0] = ["Petyr", "Petrov", 45]
 			# TypeError: 'tuple' object does not support item assignment
 		</code></pre>

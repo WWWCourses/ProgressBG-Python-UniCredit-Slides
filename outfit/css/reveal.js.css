@@ -14,7 +14,7 @@
 }
 
 .reveal>.slides{
-  font-size: 1.2em;
+  font-size: 1em;
 }
 /*the presentation title ( all slides )*/
 .reveal>.slides h1{
@@ -27,7 +27,7 @@
 .reveal>.slides>section>h2{
   position: relative;
   top: -0.5em;
-  font-size: 1.3em;
+  font-size: 1.2em;
   opacity: .7;
   /*background: red;*/
 }
