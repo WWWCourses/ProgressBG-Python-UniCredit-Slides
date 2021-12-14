@@ -204,13 +204,13 @@
 		</code></pre>
 		<p class="note">Note, the last example: <code>"9" < "1000"</code>, the result is False, because strings are compared lexicographically.</p>
 	</section>
-	<section><h3>lexicographical comparison</h3>
+	<section><h3 id="LexicographicalComparison">lexicographical comparison</h3>
 			<dl class="fa">
 				<dt>Symbols are compared by their position (codepoint) according to the character code table used.</dt>
 				<dt>First the first two items are compared, and if they differ this determines the outcome of the comparison.If they are equal, the next two items are compared, and so on, until either sequence is exhausted.</dt>
 			</dl>
 	</section>
-	<section><h3>So, why  "9" < "1000" returns False?</h3>
+	<section><h3 id="LexicographicalComparisonExample">So, why  "9" < "1000" returns False?</h3>
 		<dl class="fa">
 			<dt>If we use the <a href="https://ascii.cl/">ASCII Codes Table</a>, we see that the ASCII code point for "9" is 57, and for "1" - 49.</dt>
 			<dt>So, Python compares <code>57 < 49</code> and as the result is False it returns False for the whole expression</dt>
