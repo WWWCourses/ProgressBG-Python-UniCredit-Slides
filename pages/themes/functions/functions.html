@@ -87,7 +87,7 @@
 			<dt>A function is a <span class="note">named block of statements</span> which perform one conceptual task.</dt>
 			<dt>A typical example for a function, in the real life, is a recipe in a cooking book.</dt>
 			<dt>The statements in the function are performed <span class="note">only after the function is called</span>.</dt>
-			<dt>Functions help us to organise our code (<span class="note">break a task into sub-tasks</span>)</dt>
+			<dt>Functions help us to organize our code (<span class="note">break a task into sub-tasks</span>)</dt>
 		</dl>
 	</section>
 </section>
@@ -101,7 +101,7 @@
 				statements
 				<em>return [expression]</em>
 		</code></pre>
-		<dl class="fa" style="font-size: .7em">
+		<dl class="fa" style="font-size: 1em">
 			<dt>def</dt>
 			<dd>A keyword that starts the function definition</dd>
 			<dt>function_name</dt>
@@ -113,7 +113,7 @@
 			<dt>statements</dt>
 			<dd>block of statements, also called <span class="note">function body</span>. Must have at least 1 statement.</dd>
 			<dt><em>return [expression]</em></dt>
-			<dd>Optional. Specify what the return value of the function should be.</dd>
+			<dd>Optional. Specify what t<span class="note">he return value of the function</span> should be.</dd>
 		</dl>
 	</section>
 	<section><h3>The pass statement</h3>
@@ -122,8 +122,14 @@
 			<dt>In such cases, you can use the <code>pass</code> statement for function body:</dt>
 		</dl>
 		<pre><code rel="Python" class="python">
-			def my_fun():
-			    pass
+			def do_task1():
+				pass
+
+			def do_task2():
+				pass
+
+			def do_task3():
+				pass
 		</code></pre>
 		<p>You can use the <code>pass</code> statement anywhere in your code, where you need a "do nothing" block!</p>
 	</section>
@@ -134,8 +140,11 @@
 
 				print("Hello!")
 		</code></pre>
-		<p class="note">Note, this code will not print anything if you try to run it as is.</p>
-		<p>This is just the function's definition. In order to execute the statements in it, the function should be called!</p>
+		<dl class="fa">
+			<dt class="note">Note, this code will not print anything if you try to run it as is</dt>
+			<dt>This is just the function's definition</dt>
+			<dt>In order to execute the statements in it, <span class="note">the function should be called</span>!</dt>
+		</dl>
 	</section>
 </section>
 
@@ -144,15 +153,24 @@
 </section>
 <section><h2>Function Call</h2>
 	<section>
-		<p>The statements in the body of a function will be executed only when the function is called:</p>
-		<pre><code rel="Syntax" class="python" data-noescape>
-			<b>function_name(</b><em>opt_arg_list</em><b>)</b>
-		</code></pre>
-		<pre><code rel="Python" class="python">
-			# execute the greet() function:
-			greet()
-		</code></pre>
-		<p class="note">Note, the braces after the function name are required!</p>
+		<dl class="fa">
+			<dt>The statements in the body of a function will be executed only when the function is called:</dt>
+			<pre><code rel="Syntax" class="python" data-noescape>
+				<b>function_name(</b><em>opt_arg_list</em><b>)</b>
+			</code></pre>
+			<dt><i>opt_arg_list</i> is optional, but <span class="note">braces are required</span></dt>
+			<pre><code rel="Python" class="python">
+				### define greet() function
+				def greet():
+					"""Just prints hello"""
+
+					print("Hello!")
+
+				### execute the greet() function:
+				greet()
+			</code></pre>
+			<dt>Note, that the braces after the function name are present!</dt>
+		</dl>
 	</section>
 	<section>
 		<p class="note">A function must be defined before you call it, or a <b>NameError</b> will be raised!</p>
@@ -163,7 +181,6 @@
 			# define greet() function:
 			def greet():
 			  print("Hello!")
-			  print(5/2)
 
 			# NameError: name 'greet' is not defined
 		</code></pre>
@@ -189,43 +206,40 @@
 	<section>
 		<dl class="fa">
 			<dt>A function is not very useful if it operates on same values</dt>
+			<pre><code rel="Python" class="python">
+				def add():
+					print(2+3)
+
+				add()
+				add()
+				add()
+
+				# 5
+				# 5
+				# 5
+			</code></pre>
+			<dt>It will be better if we could do:</dt>
+			<pre><code rel="Python" class="python">
+				# call add with different arguments:
+				add(20, 22)
+				add(123, 321)
+				add(16, 10)
+
+				# DESIRED OUTPUT:
+				# 42
+				# 444
+				# 26
+			</code></pre>
 		</dl>
-		<pre><code rel="Python" class="python">
-			def add():
-				print(2+3)
-
-			add()
-			add()
-			add()
-
-			# 5
-			# 5
-			# 5
-		</code></pre>
 	</section>
 	<section>
 		<dl class="fa">
-			<dt>It will be better if we could do:</dt>
-		</dl>
-		<pre><code rel="Python" class="python">
-			# call add with different arguments:
-			add(20, 22)
-			add(123, 321)
-			add(16, 10)
-
-			# 42
-			# 444
-			# 26
-		</code></pre>
-	</section>
-	<section>
-		<dl class="fa" style="font-size: .8em">
+			<dt class="note">Parameters are local function variables which get values when the function is called with the respective arguments.</dt>
+			<a href="images/passing_arguments.png"><img src="images/passing_arguments.png"></a>
 			<dt>You can define a function to use parameters by listing them in the braces.</dt>
 			<dt>Parameters names should be valid variable names.</dt>
 			<dt>When you call a function, you list in the braces the respective parameters values (called <span class="note">arguments</span>)</dt>
-			<dt>Parameters are local function variables which get values when the function is called with the respective arguments.</dt>
 		</dl>
-		<a href="images/passing_arguments.png"><img src="images/passing_arguments.png"></a>
 	</section>
 	<section><h3>Positional Arguments</h3>
 		<dl class="fa">
@@ -233,8 +247,8 @@
 			<dd>first parameter gets the value of first argument</dd>
 			<dd>second parameter - the value of second argument</dd>
 			<dd>and so on...</dd>
+			<a href="images/passing_arguments_2.png"><img src="images/passing_arguments_2.png"></a>
 		</dl>
-		<a href="images/passing_arguments_2.png"><img src="images/passing_arguments_2.png"></a>
 	</section>
 	<section><h3>Positional Arguments</h3>
 		<dl class="fa">
@@ -251,7 +265,7 @@
 			sub(99, 3, 3)
 			# TypeError: sub() takes 2 positional arguments but 3 were given
 		</code></pre>
-		<p>But you can use <em>default parameters values</em>.</p>
+		<!-- <p>But you can use <em>default parameters values</em>.</p> -->
 	</section>
 	<section><h3>Default Parameters Values</h3>
 		<dl class="fa">
@@ -274,14 +288,14 @@
 		<p class="note">Default parameters must follow the non-default parameters!</p>
 		<pre><code rel="Python" class="python">
 			def greet(msg="Hi", name):
-				print("{} {}!".format(msg, name))
+				print(f"{msg} {name}!")
 
 			greet("Maria")
 			# SyntaxError: non-default argument follows default argument
 		</code></pre>
 		<pre><code rel="Python" class="python">
 			def greet(name, msg="Hi"):
-				print("{} {}!".format(msg, name))
+				print(f"{msg} {name}!")
 
 			greet("Maria")
 			# Hi Maria!
@@ -293,7 +307,7 @@
 		</dl>
 		<pre><code rel="Python" class="python">
 			def greet(msg, name):
-				print("{} {}!".format(msg, name))
+				print(f"{msg} {name}!")
 
 			greet(name="Maria",  msg="Hi")
 		</code></pre>
@@ -302,7 +316,7 @@
 		<p class="note">Named arguments must follows the positional arguments!</p>
 		<pre><code rel="Python" class="python">
 			def greet(msg, name):
-				print("{} {}!".format(msg, name))
+				print(f"{msg} {name}!")
 
 			greet(name="Maria", "Hi")
 			# SyntaxError: positional argument follows keyword argument
@@ -325,7 +339,7 @@
 			#(1, 2)
 			#(1, 2, 3)
 		</code></pre>
-		<p>The name <code>args</code> can be any valid variable name, but its a convention to name the unpacked arguments with <code>args</code></p>
+		<p>The name <code>args</code> can be any valid variable name, but its a convention to use <code>*args</code> to denote that it contains the packed arguments</p>
 	</section>
 	<section><h3>Variable Number of Positional Arguments (*args)</h3>
 		<p class="note">Variable arguments must follow the positional arguments:</p>

@@ -90,7 +90,7 @@
 			<dt>Boolean values in Python are used mainly in the Conditional Statements. They are the returned value of the Comparison Operators. </dt>
 		</dl>
 	</section>
-	<section><h3>What is True/False in Python?</h3>
+	<section id="WhatIsTrueFalseInPython"><h3>What is True/False in Python?</h3>
 		<p>True/False values for most of the build-in objects:</p>
 		<table>
 			<tr>
@@ -280,25 +280,34 @@
 <section id="LogicalBooleanOperators"><h1>Logical (Boolean) operators</h1></section>
 <section><h2>Logical (Boolean) operators</h2>
 	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>Logical operations are used to combine simple comparison operations into more sophisticated.</dt>
+			<dd>Like "if the user is adult AND the user is from Bulgaria"</dd>
+		</dl>
+		<br><br>
 		<table>
 			<tr>
-				<th>Operation</th><th>Result</th>
+				<th>Operation</th><th>Name</th><th>Result</th>
 			</tr>
 			<tr>
 				<td>x <span class="note">or</span> y</td>
+				<td>Logical OR</td>
 				<td>if x is false, then y, else x</td>
 			</tr>
 			<tr>
 				<td>x <span class="note">and</span> y</td>
+				<td>Logical AND</td>
 				<td>if x is false, then x, else y</td>
 			</tr>
 			<tr>
 				<td><span class="note">not</span> x</td>
+				<td>Logical NOT</td>
 				<td>if x is false, then True, else False</td>
 			</tr>
 		</table>
 		<br>
 		<dl class="fa">
+			<dt>where <code>x</code> and <code>y</code> are <i>expressions</i></dt>
 			<dt><span class="note">and</span> and <span class="note">or</span> returns one of their operands. I.e. not necessary boolean type.</dt>
 			<dt><span class="note">not</span> always returns boolean value</dt>
 		</dl>
@@ -350,9 +359,8 @@
 			</tr>
 		</table>
 		<p>Legend: <b>T</b> - true; <b>F</b> - false</p>
-	</section>
-	<section><h3>Examples</h3>
-		<pre><code rel="Python" class="python">
+		<h3>Examples</h3>
+		<pre style="width: 50vw;"><code rel="Python" class="python">
 			>>> True and False
 			False
 			>>> 0 and 1
@@ -365,7 +373,26 @@
 			False
 			>>> not 0
 			True
+		</code></pre>
+	</section>
+	<section><h3>More examples</h3>
+		<pre><code rel="Python" class="python">
+			user_name=''
+			user_age = 15
+			user_country = 'BG'
 
+			print(user_age>18 and user_country=='BG')
+			print(user_age>18 or user_country=='BG')
+
+			# note that the value of logical operations is not always True/False
+			print(user_name and 'Anonymous' )
+			print(user_name or '***Anonymous***' )
+		</code></pre>
+		<pre class="fragment fade-down"><code rel="Output" class="bash">
+			False
+			True
+
+			***Anonymous***
 		</code></pre>
 	</section>
 </section>
@@ -383,9 +410,9 @@
 <section id="IfStatement"><h1><code class="note">if</code> statement</h1></section>
 <section><h2><code class="note">if</code> statement</h2>
 	<section><h3>Syntax</h3>
-		<a href="images/ifFlow.png"><img src="images/ifFlow.png"></a><br>
+		<a href="images/ifFlow.png"><img src="images/ifFlow.png" style="height:20vh"></a><br>
 		<dl class="fa">
-			<dt><span class="note">Condition</span> can be any expression, which could be evaluated to <span class="note">True/False</span></dt>
+			<dt><span class="note">Condition</span> can be any expression, which is evaluated to <span class="note">True/False</span> (remember <a href="#WhatIsTrueFalseInPython" target="_blank">What is True/False in Python</a> )</dt>
 			<pre><code rel="Syntax" class="shell">
 				if condition :
 					block 1

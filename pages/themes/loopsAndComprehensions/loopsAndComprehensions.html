@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>loops</title>
+	<title>loopsAndComprehensions</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -55,7 +55,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Loops in Python</h1></section>
+<section><h1>Loops in Python. Comprehensions.</h1></section>
 <section data-transition="zoom">
 	<!-- linkedin badge -->
 	<!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
@@ -80,8 +80,8 @@
 	</section>
 </section>
 
-<section><h1>What are <span class="note">loops (cycles)</span></h1></section>
-<section><h2>What are <span class="note">loops (cycles)</span></h2>
+<section><h1>What are <span class="note">loops (cycles)?</span></h1></section>
+<section><h2>What are <span class="note">loops (cycles)?</span></h2>
 	<section>
 		<dl class="fa">
 			<dt>Loops are control statements which allows a block of code to be executed <span class="note">multiple</span> times.</dt>
@@ -91,7 +91,7 @@
 	</section>
 </section>
 
-<section><h1><code>while</code> loop</h1></section>
+<section id="whileLoop"><h1><code>while</code> loop</h1></section>
 <section><h2><code>while</code> loop</h2>
 	<section><h3>Syntax</h3>
 		<pre><code rel="Syntax" class="python" data-noescape>
@@ -171,7 +171,7 @@
 	</section>
 </section>
 
-<section><h1><code>for</code> loop</h1></section>
+<section id="forLoop"><h1><code>for</code> loop</h1></section>
 <section><h2><code>for</code> loop</h2>
 	<section><h3>Syntax</h3>
 		<pre><code rel="Syntax" class="python" data-noescape>
@@ -225,7 +225,7 @@
 	</section>
 </section>
 
-<section><h1><code>break</code> statement</h1></section>
+<section id="breakStatement"><h1><code>break</code> statement</h1></section>
 <section><h2><code>break</code> statement</h2>
 	<section><h3>Syntax in while loop</h3>
 		<pre><code rel="Syntax" class="python" data-noescape>
@@ -280,7 +280,7 @@
 				if (condition): break
 		</code></pre>
 	</section>
-	<section><h3>Example - <code>do-while</code> emulation with <code>break</code></h3>
+	<section id="DoWhileEmulationWithBreak"><h3>Example - <code>do-while</code> emulation with <code>break</code></h3>
 		<pre><code rel="Python" class="python">
 			# ask user to enter a name (string), until it contains at least 3 symbols
 			while True:
@@ -352,7 +352,7 @@
 	</section>
 </section>
 
-<section><h1><code>continue</code> statement</h1></section>
+<section id="continueStatement"><h1><code>continue</code> statement</h1></section>
 <section><h2><code>continue</code> statement</h2>
 	<section>
 		<dl class="fa">
@@ -403,7 +403,109 @@
 	</section>
 </section>
 
-<section><h1>Exercises</h1></section>
+<section data-min="5" id="comprehensions"><h1>Comprehensions</h1></section>
+<section><h2>List Comprehensions</h2>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>A typical programming task is to create a list from the values of existing list (or other iterable data structure)</dt>
+			<dt>For example, let's have to create a new list which will contain only the even numbers from another list.</dt>
+			<dd>We can use for loop: </dd>
+			<pre><code rel="Python" class="python">
+				l = [1,2,3,4,5]
+				evens = []
+
+				for el in l:
+					if el%2==0:
+						evens.append(el)
+
+				print(evens)
+			</code></pre>
+			<dd>but Python offers a shorter syntax, called <code class="note">list comprehension</code></dd>
+			<pre><code rel="Python" class="python">
+				l = [1,2,3,4,5]
+
+				evens = [el for el in l if el%2==0]
+
+				print(evens)
+			</code></pre>
+			<dt>List comprehensions provide a concise way to create lists</dt>
+		</dl>
+	</section>
+	<section><h3>Syntax</h3>
+		<pre><code rel="Syntax" class="python" data-noescape>
+			newlist = <b>[</b><i>expression</i> <b>for</b> <i>item</i> <b>in</b> <i>iterable</i> <b>if</b> <i>condition</i><b>]</b>
+		</code></pre>
+		<dl class="fa">
+			<dt><i>expression</i> is evaluated for each element in <i>iterable</i> in the context of the <b>for</b> and <b>if</b> clauses which follow it.</dt>
+			<dt><b>if</b> clause is optional, and if present it plays the role of filter.</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			l = [1,2,3,4,5]
+
+			evens = [el for el in l if el%2==0]	# => [2, 4]
+
+			dummy = [1 for el in l if el%2==0]	# => [1, 1]
+
+			# without if clause:
+			powered = [el**2 for el in l]		# => [1, 4, 9, 16, 25]
+		</code></pre>
+	</section>
+	<section><h3>Examples</h3>
+		<dl class="fa">
+			<dt>Consider next task: generate a new list from a given list l, where each even number is replaced with 1 and odd number - with 0.</dt>
+			<dt>Hint: we would not need the if clause, because we do not want to filter the list, but instead - map a value for each list item. So, we must write an <i>expression</i> which return 1 if item is even, and 0 - if item is odd.</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			l = [1,2,3,4,5]
+
+			new = [0 if el%2 else 1 for el in l]
+
+			print(new)
+
+		</code></pre>
+	</section>
+</section>
+<section><h2>Dictionary Comprehensions</h2>
+	<section>
+		<dl class="fa">
+			<dt>Similarly to List Comprehension, Python defines Dictionary Comprehensions - a concise syntax to create dictionary.</dt>
+		</dl>
+		<pre><code rel="Syntax" class="python" data-noescape>
+			new_dict = <b>{</b><i>key:value</i> <b>for clause</b> <b>optional if clause</b> <b>}</b>
+		</code></pre>
+		<pre><code rel="Python" class="python">
+			eng_bul = {
+				'apple':'ябълка',
+				'orange':'портокал',
+				'banana':'банан'
+			}
+
+			bul_eng = {v:k for k,v in eng_bul.items()}
+			print(bul_eng)
+
+			# {'ябълка': 'apple', 'портокал': 'orange', 'банан': 'banana'}
+		</code></pre>
+	</section>
+	<section><h3>Examples</h3>
+		<dl class="fa">
+			<dt>Task: create new dictionary from <code>scores</code>, containing only the items which has values > 4.0</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			scores = {
+				'ivan':4.5,
+				'maria':5.0,
+				'asen':3.5
+			}
+
+			best = {k:v for k,v in scores.items() if v>4}
+
+			print(best)
+		</code></pre>
+	</section>
+</section>
+
+
+<section id="hw"><h1>Exercises</h1></section>
 <section><h2>HW</h2>
 	<section><h3>"Guess the number" - full version</h3>
 		<dl class="fa">
