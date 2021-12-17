@@ -429,13 +429,13 @@
 	<section><h3>example - align matters</h3>
 		<pre><code rel="Python" class="python">
 			if False :
-				print("Statement1")
-			  print("Statement2")
-			print("Statement3")
+				print("1")
+				print("2")
+			print("3")
 		</code></pre>
 		<dl class="fa">
-			<dt>Statement1 and Statement2 forms a block, which will be executed, <span class="note">only if the condition is true</span>.</dt>
-			<dt>But Statement3 is not in the block, and will be always executed!</dt>
+			<dt><code>print(1)</code>  and <code>print(2)</code>  forms a block, which will be executed, <span class="note">only if the condition is true</span>.</dt>
+			<dt>But <code>print(3)</code>  is not in the block, and will be always executed!</dt>
 		</dl>
 	</section>
 </section>
@@ -536,10 +536,10 @@
 			<tr><td>&gt;= 30</td><td>Obesity</td></tr>
 		</table>
 	</section>
-	<section id="hw_guess_the_number" style="font-size: 0.8em"><h3>Task: guess_the_number.py</h3>
+	<section id="hw_guess_the_number"><h3>Task: guess_the_number.py</h3>
 		<dl class="fa">
 			<dt>Write a simple Python program, implementing the "Guess the number" game, following the rules:</dt>
-			<dd>The program will "think" of a number using the <code>random module</code>, as shown in code shown in next slide.</dd>
+			<dd>The program will "think" of a number using the <code>random module</code>, as shown in  next slide.</dd>
 			<dt>You have to implement now only the first user move:</dt>
 			<dd>Prompt the user for his/her guess</dd>
 			<dd>If the user guess is equal to the machine number => print out a congratulation message!</dd>
