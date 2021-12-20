@@ -227,23 +227,26 @@
 
 <section id="breakStatement"><h1><code>break</code> statement</h1></section>
 <section><h2><code>break</code> statement</h2>
-	<section><h3>Syntax in while loop</h3>
-		<pre><code rel="Syntax" class="python" data-noescape>
-			while <i>condition</i><b>:</b>
-				<i>block 1</i>
-				if <i>break_cond</i><b>:</b>
-					break  # loop is terminated, block 2 is skipped
-				<i>block 2</i>
-		</code></pre>
-	</section>
-	<section><h3>Syntax in for loop</h3>
-		<pre><code rel="Syntax" class="python" data-noescape>
-			for <i>item</i> in <i>sequence</i> <b>:</b>
-				<i>block 1</i>
-				if <i>break_cond</i><b>:</b>
-					break  # loop is terminated, block 2 is skipped
-				<i>block 2</i>
-		</code></pre>
+	<section><h3>Syntax</h3>
+		<dl class="fa">
+			<dt>The break statement in Python (like in other C-based languages) breaks out of the innermost enclosing <code>for</code> or <code>while</code> loop.</dt>
+			<dt>The most common use for <code>break</code> is when some external condition is triggered to exit immediately from a loop.</dt>
+			<dt>The <code>break</code> statement can be used in both <code>while</code> and <code>for</code> loops.</dt>
+			<pre><code rel="Syntax in while loop" class="python" data-noescape>
+				while <i>condition</i><b>:</b>
+					<i>block 1</i>
+					if <i>break_cond</i><b>:</b>
+						break  # loop is terminated, block 2 is skipped
+					<i>block 2</i>
+			</code></pre>
+			<pre><code rel="Syntax in for loop" class="python" data-noescape>
+				for <i>item</i> in <i>sequence</i> <b>:</b>
+					<i>block 1</i>
+					if <i>break_cond</i><b>:</b>
+						break  # loop is terminated, block 2 is skipped
+					<i>block 2</i>
+			</code></pre>
+		</dl>
 	</section>
 	<section><h3>Flow</h3>
 		<a href="images/WhileBreakFlow.png"><img src="images/WhileBreakFlow.png"></a>
@@ -261,24 +264,25 @@
 		</code></pre>
 	</section>
 	<section><h3><code>do-while</code> emulations</h3>
-		<p><span class="note">Python did not have <code>do-while</code> loop, as in other languages</span> (reason: <a href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a>)</p>
-		<p>General structure of a do-while loop:</p>
-		<pre><code rel="Python" class="python">
-			do {
+		<dl class="fa">
+			<dt><span class="note">Python did not have <code>do-while</code> loop, as in other languages</span> (reason: <a href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a>)</dt>
+			<dt>But <code>do-while</code> structure is useful when we need the body of the <code>while</code> loop to be executed at least ones.</dt>
+			<dd>General structure of a do-while loop:</dd>
+			<pre><code rel="Python" class="python">
+				do {
 
-			  loop block
+					loop block
 
-			} while (condition);
-		</code></pre>
-	</section>
-	<section>
-		<p>But it can be easily emulated if needed</p>
-		<pre><code rel="Python - pseudo code" class="python">
-			while True:
-			  # loop block
+				} while (condition);
+			</code></pre>
+			<dt>But it can be easily emulated if needed</dt>
+			<pre><code rel="Python - pseudo code" class="python">
+				while True:
+					loop block
 
-				if (condition): break
-		</code></pre>
+					if (condition): break
+			</code></pre>
+		</dl>
 	</section>
 	<section id="DoWhileEmulationWithBreak"><h3>Example - <code>do-while</code> emulation with <code>break</code></h3>
 		<pre><code rel="Python" class="python">
@@ -292,63 +296,48 @@
 			print("Thank you, {}!".format(user_name))
 		</code></pre>
 	</section>
-	<!-- <section><h3>Example - <code>do-while</code> emulation without <code>break</code></h3>
-		<pre><code rel="Python" class="python">
-			# ask user to enter a name (string), until it contains at least 3 symbols
-			user_name = input("Enter a name, please: ")
-			user_name_length = len(user_name)
-
-			while user_name_length < 3:
-				user_name = input("Enter a name (at least 3 symbols): ")
-				user_name_length = len(user_name)
-
-			print("Thank you, {}!".format(user_name))
-		</code></pre>
-		<p class="note">Can you imagine how the code would look like, if the "do" block was more than 1 line long?</p>
-	</section> -->
 	<section><h3>switch-case statement emulation</h3>
 		<dl class="fa">
-			<dt>If you need a kind of "switch-case" functionality, you can do it with multiple <code>elif - break</code> blocks</dt>
+			<dt>Python does not have (yet) "switch-case" statement</dt>
+			<pre><code rel="C-like syntax" class="c">
+				switch(expression) {
+					case constant-expression  :
+							statement(s);
+							break; //optional
+					case constant-expression  :
+							statement(s);
+							break; //optional
+
+					// multiple number of case statement is allowed
+					default : //Optional
+							statement(s);
+				}
+			</code></pre>
+			<dt>But you can emulate it with multiple <code>if-elif-break</code> blocks</dt>
+			<pre><code rel="JS" class="js">
+				# print program menu:
+				print("Select an action:")
+				print("1. Action 1")
+				print("2. Action 3")
+				print("3. Action 3")
+
+				while True:
+					user_choice = int(input("Enter a number [0-4]: "))
+
+					if user_choice == 1:
+						print("Actin 1 fired!")
+						break
+					elif user_choice == 2:
+						print("Actin 2 fired!")
+						break
+					elif user_choice == 3:
+						print("Actin 3 fired!")
+						break
+					else:
+						pass
+			</code></pre>
+			<dt>Another way is to use Python dictionaries which values are functions (will be discussed further)</dt>
 		</dl>
-		<pre><code rel="JS" class="js">
-			# print program menu:
-			print("Select an action:")
-			print("1. Action 1")
-			print("2. Action 3")
-			print("3. Action 3")
-
-			while True:
-				user_choice = int(input("Enter a number [0-4]: "))
-
-				if user_choice == 1:
-					print("Actin 1 fired!")
-					break
-				elif user_choice == 2:
-					print("Actin 2 fired!")
-					break
-				elif user_choice == 3:
-					print("Actin 3 fired!")
-					break
-				else:
-					pass
-		</code></pre>
-		<p>Another way is to use Python dictionaries, which will be discussed further.</p>
-	</section>
-	<section><h3>Task: prompt user to enter at least 3 symbols long user name</h3>
-		<dl class="fa">
-			<dt>Implement a program, which will asks the user for a user name with at least 3 symbols in it.</dt>
-			<dt>Bellow is the desired output</dt>
-		</dl>
-		<pre><code rel="Output" class="shell">
-			Enter your user name (at least 3 symbols):
-			*** At least 3 symbols, please! Try again.
-
-			Enter your user name (at least 3 symbols): ad
-			*** At least 3 symbols, please! Try again.
-
-			Enter your user name (at least 3 symbols): ada
-			Nice, your user_name is:  ada
-		</code></pre>
 	</section>
 </section>
 
@@ -359,19 +348,28 @@
 			<dt>Returns the control to the beginning of the loop.</dt>
 			<dd>code <b>after</b> continue will be skipped.</dd>
 			<dt>Usually, continue statement is dependent on some condition.</dt>
+			<a href="images/WhileContinueFlow.png"><img src="images/WhileContinueFlow.png"></a>
 		</dl>
 	</section>
-	<section><h3>Syntax in while loop</h3>
-		<pre><code rel="Syntax" class="python" data-noescape>
+	<section><h3>Syntax</h3>
+		<pre><code rel="Syntax in while loop" class="python" data-noescape>
 			while <i>condition</i><b>:</b>
 				<i>block 1</i>
+
 				if <i>continue_cond</i><b>:</b>
 					continue  # go to while condition
+
 				<i>block 2</i>
 		</code></pre>
-	</section>
-	<section><h3>Flow</h3>
-		<a href="images/WhileContinueFlow.png"><img src="images/WhileContinueFlow.png"></a>
+		<pre><code rel="Syntax in for loop" class="python" data-noescape>
+			for <i>item</i> in <i>sequence</i> <b>:</b>
+					<i>block 1</i>
+
+					if <i>continue_cond</i><b>:</b>
+						continue  # continue loop with next item
+
+					<i>block 2</i>
+		</code></pre>
 	</section>
 	<section><h3>Example -  print all numbers in [1..5], but skip 3</h3>
 		<pre><code rel="Python" class="python">
