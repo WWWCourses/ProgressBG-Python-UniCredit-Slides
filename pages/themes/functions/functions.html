@@ -130,7 +130,7 @@
 	</section>
 	<section><h3>The pass statement</h3>
 		<dl class="fa">
-			<dt>Sometimes you need to define a function which body will be later written. But Python did not allows empty blocks!</dt>
+			<dt>Sometimes you need to define a function which body will be written later, but <span class="note">Python did not allows empty blocks</span>!</dt>
 			<dt>In such cases, you can use the <code>pass</code> statement for function body:</dt>
 		</dl>
 		<pre><code rel="Python" class="python">
@@ -185,30 +185,30 @@
 		</dl>
 	</section>
 	<section>
-		<p class="note">A function must be defined before you call it, or a <b>NameError</b> will be raised!</p>
-		<pre><code rel="Python" class="python">
-			# execute the greet() function:
-			greet()
+		<dl class="fa">
+			<dt class="note">A function must be defined before you call it, or a <b>NameError</b> will be raised!</dt>
+			<pre><code rel="Python" class="python">
+				# execute the greet() function:
+				greet()
 
-			# define greet() function:
-			def greet():
-			  print("Hello!")
+				# define greet() function:
+				def greet():
+				  print("Hello!")
 
-			# NameError: name 'greet' is not defined
-		</code></pre>
-	</section>
-	<section>
-		<p>function call - the right way:</p>
-		<pre><code rel="Python" class="python">
-			# define greet() function:
-			def greet():
-			  print("Hello!")
+				# NameError: name 'greet' is not defined
+			</code></pre>
+			<dt>function call - the right way:</dt>
+			<pre><code rel="Python" class="python">
+				# define greet() function:
+				def greet():
+				  print("Hello!")
 
-			# execute the greet() function:
-			greet()
+				# execute the greet() function:
+				greet()
 
-			# Hello!
-		</code></pre>
+				# Hello!
+			</code></pre>
+		</dl>
 	</section>
 </section>
 
