@@ -93,13 +93,16 @@
 	</section>
 	<section><h3>examples</h3>
 		<pre><code rel="Python" class="python">
+			# syntax error:
+			>>>print(x)
+			#NameError: name 'x' is not defined
+
+			# runtime error:
 			>>> user_number = int(input("Enter a number: "))
 			Enter a number: ada
 			# ValueError: invalid literal for int() with base 10: 'ada'
 
-			print(i)
-			#NameError: name 'i' is not defined
-
+			# runtime error:
 			>>> colors = ["red", "green","blue"]
 			>>> print( colors[3] )
 			# IndexError: list index out of range
@@ -122,31 +125,43 @@
 			except <em>ExceptionType</em> as e:
 				# do something if an <em>ExceptionType</em> was raised
 			else:
-				# do something if there was no Exception
+				# do something only when no Exception was raised
 			finally:
 				# do something no matter if an Exception was raised or not.
 				# (useful for closing DB connections, etc.)
 		</code></pre>
 		<dl class="fa" style="font-size: .8em">
 			<dt><span class="note">except</span> is executed only when an exception from <em>ExceptionType</em> was raised in <code>try</code> code. <em>ExceptionType</em> is any of the built-in <a href="https://docs.python.org/3/library/exceptions.html">Exception Classes</a> or a User-defined Exception Class.You may have more than one <b>except</b> clauses for different Exception Types</dt>
-			<dt><span class="note">else</span> is executed only when the code in <code>try</code> clause did not raise any exception.</dt>
+			<dt><span class="note">else</span> is executed <span class="note">only</span> when the code in <code>try</code> clause did not raise any exception.</dt>
 			<dt><span class="note">finally</span> is always executed!</dt>
 		</dl>
 	</section>
-	<section><h3>Syntax Examples</h3>
+	<section><h3>Example</h3>
 		<pre><code rel="Python" class="python">
 			try:
 				# code, which can raise an exception
 				user_number = int(input("Enter a number: "))
-			except Exception as e:
+			except ValueError as e:
 				# do something if an Exception was raised
 				print("You did not enter a number!")
 			else:
-				# do something if there was no Exception
+				# do something only if there was no Exception
 				print("Your number is ", user_number)
 			finally:
 				# do something no matter if an Exception was raised or not
 				print("That was all!")
+		</code></pre>
+	</section>
+	<section><h3>Example</h3>
+		<pre><code rel="Python" class="python">
+			try:
+				a = 1/0
+			except ZeroDivisionError:
+				print("Division by zero not allowed.")
+			else:
+				print("In this universe, division by zero is allowed.")
+
+			print('END')
 		</code></pre>
 	</section>
 </section>
