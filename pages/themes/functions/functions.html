@@ -506,7 +506,8 @@
 	<section><h3>What?</h3>
 		<dl class="fa">
 			<dt>A <span class="note">namespace</span> stores the mapping from names to objects. Usually implemented internally by a dictionary.</dt>
-			<dt>A <span class="note">scope</span> is a lexical (textual) region of the program, where a namespace is directly accessible. I.e. where a variable can be accessed (used, visible).</dt>
+			<dt>A <span class="note">scope</span> is a lexical (textual) region of the program, where a namespace is directly accessible (i.e. without a prefix).</dt>
+			<dt>You can think of the scope as part of your program where a variable can be accessed (used, visible).</dt>
 		</dl>
 		<a href="images/scope.png"><img src="images/scope.png"></a>
 	</section>
@@ -587,67 +588,63 @@
 		<dl class="fa">
 			<dt>We can declare a name with the <code>nonlocal</code> statement prefix</dt>
 			<dt>The nonlocal statement causes the listed names to refer to previously bound variables in the nearest enclosing scope excluding globals.</dt>
+			<pre><code rel="Python" class="python">
+				def outer():
+				  x=2
+
+				  def inner():
+					nonlocal x
+					x = 3
+					print(f'x = {x} in inner')
+
+				  inner()
+				  print(f'x = {x} in outer')
+
+				x = 1
+				outer()
+				print(f'x = {x} in global')
+
+				#x = 3 in inner
+				#x = 3 in outer
+				#x = 1 in global
+			</code></pre>
 		</dl>
-	</section>
-	<section><h3>the <code>nonlocal</code> statement - example</h3>
-		<pre><code rel="JS" class="js">
-			def outer():
-			  x=2
-
-			  def inner():
-			    nonlocal x
-			    x = 3
-			    print(f'x = {x} in inner')
-
-			  inner()
-			  print(f'x = {x} in outer')
-
-			x = 1
-			outer()
-			print(f'x = {x} in global')
-
-			#x = 3 in inner
-			#x = 3 in outer
-			#x = 1 in global
-		</code></pre>
 	</section>
 	<section><h3 class="advanced">the <code>global</code> statement</h3>
 		<dl class="fa">
 			<dt>We can declare a name with the <code>global</code> statement prefix</dt>
 			<dt>The <code>global</code> statement causes the listed names to be interpreted as global names.</dt>
+			<pre><code rel="Python" class="python">
+				def outer():
+				  x=2
+
+				  def inner():
+					global x
+					x = 3
+					print(f'x = {x} in inner')
+
+				  inner()
+				  print(f'x = {x} in outer')
+
+				x = 1
+				outer()
+				print(f'x = {x} in global')
+
+				#x = 3 in inner
+				#x = 2 in outer
+				#x = 3 in global
+			</code></pre>
 		</dl>
 	</section>
-	<section><h3>the <code>global</code> statement - example</h3>
-		<pre><code rel="JS" class="js">
-			def outer():
-			  x=2
-
-			  def inner():
-			    global x
-			    x = 3
-			    print(f'x = {x} in inner')
-
-			  inner()
-			  print(f'x = {x} in outer')
-
-			x = 1
-			outer()
-			print(f'x = {x} in global')
-
-			#x = 3 in inner
-			#x = 2 in outer
-			#x = 3 in global
-		</code></pre>
-	</section>
-
 	<section><h3>Names Resolution - rules</h3>
 		<p>Although scopes are determined statically, they are used dynamically. I.e. a name is resolved searching in: </p>
 		<ol class="fa">
-			<li>The innermost local scope</li>
-			<li>The scopes of any enclosing functions, which are searched starting with the nearest enclosing scope, contains non-local, but also non-global names</li>
-			<li>The current module’s global names</li>
-			<li>The outermost scope is the namespace containing built-in names</li>
+			<li>The <b>local</b> (innermost) scope</li>
+			<li>The scopes of any <b>enclosing</b> functions, which are searched starting with the nearest enclosing scope, contains non-local, but also non-global names</li>
+			<li>The current module’s <b>global</b> names</li>
+			<li>The outermost scope is the namespace containing <b>built-in</b> names</li>
 		</ol>
+		<a href="./images/LEGB_Namespaces_Rules.png"><img src="./images/LEGB_Namespaces_Rules.png" alt="LEGB_Namespaces_Rules.png"></a>
 	</section>
 </section>
 
