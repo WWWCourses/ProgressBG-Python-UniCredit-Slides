@@ -51,7 +51,7 @@ pesho = Client("Pesho", "Ivanov", {
 # make maria's account:
 maria_account = BankAccount(maria, 0, "lv")
 maria_account.deposit(100)
-# change "hidden"  field:
+# note that everyone can change the "hidden" field:
 maria_account._BankAccount__balance = 1_000_000
 maria_account.report()
 

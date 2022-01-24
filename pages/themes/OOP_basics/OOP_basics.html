@@ -331,7 +331,7 @@
 <section><h2><code class="note">__init__()</code> method</h2>
 	<section><h3>What is a Class Constructor</h3>
 		<dl class="fa">
-			<dt>Class Constructor is a method, called automatically when each new object is created.</dt>
+			<dt>Class Constructor is <span class="note">a method, called automatically when each new object is created</span>.</dt>
 			<dt>A class constructor defines the action which will happens when a new object instance is created.</dt>
 			<dt>Usually, this actions include setting an initial value for the object attributes.</dt>
 		</dl>
@@ -339,50 +339,71 @@
 	<section><h3>Syntax</h3>
 		<dl class="fa">
 			<dt>In Python, the Class Constructor is implemented by a special method named <code class="note">__init__()</code></dt>
+			<pre><code rel="Syntax" class="python">
+				class ClassName:
+					def __init__(self):
+						pass
+			</code></pre>
+			<dt>Example - note that the <code>__init__</code> method is called each time an object is created:</dt>
+			<pre><code rel="Python" class="python">
+				# class definition
+				class ClassA:
+					def __init__(self):
+						print("An object of ClassA is created!")
+
+				# objects creation:
+				obj1 = ClassA()
+				obj2 = ClassA()
+
+				# output:
+				# An object of ClassA is created!
+				# An object of ClassA is created!
+			</code></pre>
 		</dl>
-		<pre><code rel="Syntax" class="python">
-			class ClassName:
-				def __init__(self):
-					pass
-		</code></pre>
 	</section>
-	<section><h3>Example 1</h3>
-		<pre><code rel="Python" class="python">
-			# class definition
-			class ClassA:
-				def __init__(self):
-					print("An object of ClassA is created!")
+	<section><h3>Person Class Constructor - Example1</h3>
+		<dl class="fa">
+			<dt>Constructor is the place, where we set the initial instance attributes:</dt>
+			<pre><code rel="Python" class="python">
+				class Person:
+					def __init__(self, name, age):
+						self.name = name
+						self.age = age
 
-			# objects creation:
-			obj1 = ClassA()
-			obj2 = ClassA()
+					def greet(self):
+						print(f"Hi there! I'm {self.name}, {self.age} years old!")
 
-			# output:
-			# An object of ClassA is created!
-			# An object of ClassA is created!
-		</code></pre>
+				maria = Person("Maria Popova", 25)
+				pesho = Person("Pesho", 27)
+
+				maria.greet()
+				pesho.greet()
+
+				# Hi there! I'm Maria Popova, 25 years old!
+				# Hi there! I'm Pesho, 27 years old!
+			</code></pre>
+		</dl>
 	</section>
-	<section><h3>Person Class Constructor Example</h3>
-		<pre><code rel="Python" class="python">
-			class Person:
-				def __init__(self, name, age):
-					self.name = name
-					self.age = age
+	<section><h3>Person Class Constructor - Example2</h3>
+		<dl class="fa">
+			<dt>Note, that instance methods are just an ordinary Python functions, so we can use everything we know on functions in instance methods:</dt>
+			<pre><code rel="Python" class="python">
+				class Person:
+					def __init__(self, sur_name="", **kw):
+						self.sur_name = sur_name
+						self.name = kw['name']
+						self.age = kw['age']
 
-				def greet(self):
-					print("Hi there! I'm {}, {} years old!".
-						format(self.name, self.age))
+					def greet(self):
+						print(f"Hi there! I'm {self.name}, {self.age} years old!")
 
-			maria = Person("Maria Popova", 25)
-			pesho = Person("Pesho", 27)
+				maria = Person(name="Maria", sur_name="Popova", age=25)
+				pesho = Person(age=27, name="Petar")
 
-			maria.greet()
-			pesho.greet()
-
-			# Hi there! I'm Maria Popova, 25 years old!
-			# Hi there! I'm Pesho, 27 years old!
-
-		</code></pre>
+				maria.greet()
+				pesho.greet()
+			</code></pre>
+		</dl>
 	</section>
 </section>
 
@@ -390,71 +411,58 @@
 <section><h2>Magic (dunder) methods</h2>
 	<section>
 		<dl class="fa">
-			<dt>Besides the <code class="note">__init__()</code> methods in Python, there are many other predefined <span class="note">special methods</span>, also called <span class="note">magic methods</span>, which have the same notation form:</dt>
+			<dt>Besides the <code class="note">__init__()</code> methods in Python, there are many other  <span class="note">predefined special methods</span>, also called <span class="note">magic (dunder) methods</span>.</dt>
+			<dd>The <b>double underscore</b> is often called <b>dunder</b>, thus the methods - <b>dunder methods</b>.</dd>
+			<dt>Reference: <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names @python.org</a></dt>
 		</dl>
-		<pre><code rel="Python" class="python">
-			__magic__()
-		</code></pre>
-		<p>The <b>double underscore</b> is often called <b>dunder</b>, thus the methods - <b>dunder methods</b></p>
 	</section>
 	<section><h3>__str__ method</h3>
 		<dl class="fa">
-			<dt>Called by str(object), format() and print() built-in functions  to compute the “informal” or nicely printable string representation of an object.</dt>
+			<dt>Called by <code>str(object)</code>, <code>format()</code> and <code>print()</code> built-in functions  to compute the “informal” or nicely printable string representation of an object.</dt>
 			<dt>You can define inside a class the <code>__str__()</code> method which will be used, when you call the str(), format() or print() functions of a class instance</dt>
 			<dt class="note">The return value must be a string!</dt>
+			<pre><code rel="Python" class="python">
+				class Person:
+					def __init__(self, name, age):
+						self.name = name
+						self.age = age
+
+					def __str__(self):
+						return f"name = {self.name}\nage = {self.age}\n"
+
+				maria = Person("Maria Popova", 25)
+
+				print(maria)
+				# name = Maria Popova
+				# age = 25
+			</code></pre>
 		</dl>
-	</section>
-	<section><h3>example</h3>
-		<pre><code rel="Python" class="python">
-			class Person:
-				def __init__(self, name, age):
-					self.name = name
-					self.age = age
-
-				def __str__(self):
-					return "name = {}\nage = {}\n".format(self.name, self.age)
-
-			maria = Person("Maria Popova", 25)
-
-			print(maria)
-			# name = Maria Popova
-			# age = 25
-		</code></pre>
 	</section>
 	<section><h3>__repr__ method</h3>
 		<dl class="fa">
 			<dt>Called by the repr() built-in function, which is typically used for debugging</dt>
 			<dt class="note">The return value must be a string!</dt>
 			<dt>if a class has only the __repr__ method and no __str__ method, __repr__ will be applied in the situations, where __str__would be applied</dt>
+			<pre><code rel="Python" class="python">
+				class Person:
+					def __init__(self, name, age):
+						self.name = name
+						self.age = age
+
+					def __repr__(self):
+					return f"""
+						# This is representation of an object:
+						obj = Person()
+						obj.name = {self.name}
+						obj.age = {self.age}
+					"""
+
+				maria = Person("Maria Popova", 25)
+
+				print(maria)
+			</code></pre>
+			<p>Note, that the __repr__ method will be invoked, when <code>print(maria)</code> is executed!</p>
 		</dl>
-	</section>
-	<section><h3>example</h3>
-		<pre><code rel="Python" class="python">
-			class Person:
-				def __init__(self, name, age):
-					self.name = name
-					self.age = age
-
-				def __repr__(self):
-					return """# This is representation of an object:
-					obj = Person()
-					obj.name = {}
-					obj.age = {}""".format(self.name, self.age)
-
-			maria = Person("Maria Popova", 25)
-
-			print(maria)
-		</code></pre>
-		<p>Note, that the __repr__ method will be invoked, when <code>print(maria)</code> is executed!</p>
-	</section>
-	<section><h3><code>__str__</code> vs <code>__repr__</code></h3>
-		<dl class="fa">
-			<dt>Use __str__, if the output should be for the end user or in other words, if it should be nicely printed.</dt>
-			<dt>Use __repr__  for the internal representation of an object. The output of __repr__ should be - if feasible - a string which can be parsed by the Python interpreter. The result of this parsing is in an equal object.</dt>
-		</dl>
-	</section>
-	<section><h3>Other dunder methods</h3>
-		<p><a href="https://www.python-course.eu/python3_magic_methods.php" class="advanced">Magic Methods and Operator Overloading</a></p>
 	</section>
 </section>
 
@@ -487,29 +495,35 @@
 
 <section data-min="10" id="encapsulationAndDataHiding"><h1>Encapsulation and Data Hiding</h1></section>
 <section><h2>Encapsulation and Data Hiding</h2>
-	<section><h3>Python's Way - Conventions</h3>
-		<table style="font-size: .8em">
-			<tr>
-				<th>Naming</th>
-				<th>Type</th>
-				<th>Meaning</th>
-			</tr>
-			<tr>
-				<td>name</td>
-				<td>Public</td>
-				<td>Attributes, that can be freely used inside or outside of a class definition.</td>
-			</tr>
-			<tr>
-				<td>_name</td>
-				<td>Protected</td>
-				<td>Protected attributes should not be used outside of the class definition, unless inside of a subclass definition.</td>
-			</tr>
-			<tr>
-				<td>__name</td>
-				<td>Private</td>
-				<td>This kind of attribute should be inaccessible and invisible. It's neither possible to read nor write to those attributes, except inside of the class definition itself.</td>
-			</tr>
-		</table>
+	<section><h3></h3>
+		<dl class="fa">
+			<dt>Encapsulation is one of the fundamental concepts in object-oriented programming (OOP), which describes the idea of <span class="note">wrapping data and the methods that work on these data within one unit - an object</span></dt>
+			<dt>This puts restrictions on accessing variables and methods directly in order to prevent the accidental modification of data.</dt>
+			<dt>In classic OOP languages (C++, Java,...) we can define a class member as: <span class="note">private</span>, <span class="note">protected</span> or <span class="note">public</span></dt>
+			<dt>In Python we do not have such language mechanisms, but we can use next Conventions:</dt>
+			<table style="font-size: .8em">
+				<tr>
+					<th>Naming</th>
+					<th>Type</th>
+					<th>Meaning</th>
+				</tr>
+				<tr>
+					<td>name</td>
+					<td>Public</td>
+					<td>Attributes, that can be freely used inside or outside of a class definition.</td>
+				</tr>
+				<tr>
+					<td>_name</td>
+					<td>Protected</td>
+					<td>Protected attributes should not be used outside of the class definition, unless inside of a subclass definition.</td>
+				</tr>
+				<tr>
+					<td>__name</td>
+					<td>Private</td>
+					<td>This kind of attribute should be inaccessible and invisible. It's neither possible to read nor write to those attributes, except inside of the class definition itself.</td>
+				</tr>
+			</table>
+		</dl>
 	</section>
 	<section><h3>Private Attributes</h3>
 		<p class="note">Python did not provide a truly <b>private attributes!</b></p>
@@ -534,6 +548,73 @@
 			maria._Person__age = 100
 			print("maria.__age is set to ", maria.__age)
 			print(maria)
+		</code></pre>
+	</section>
+	<section><h3>BankAccount and Client Example</h3>
+		<pre><code rel="Python" class="python" style="min-height:90vh">
+			class BankAccount(object):
+				"""Represent a simplified bank account
+
+				Attributes:
+					balance (float): current balance
+					owner (string): owner name
+				"""
+
+				def __init__(self, owner_obj, initial_balance, currency):
+					self.owner = owner_obj.get_name()
+					self.__balance = initial_balance
+					self.currency = currency
+
+				def deposit(self, amount):
+					self.__balance += amount
+
+				def withdraw(self, amount):
+					if amount > self.__balance:
+						print("Not enough funds!")
+						return False
+					else:
+						self.__balance -= amount
+
+				def report(self):
+					print("{} has {}{}".format(self.owner, self.__balance, self.currency))
+
+			class Client(object):
+				"""docstring for Client"""
+				def __init__(self, first_name, sur_name, addres):
+					self.first_name = first_name
+					self.sur_name = sur_name
+					self.addres = addres
+
+				def get_name(self):
+					return "{} {}".format(self.first_name, self.sur_name)
+
+			# make client objects
+			maria = Client("Maria", "Popova", {
+				"town": "Sofia",
+				"street": "Nezabravka",
+				"number": 14
+			})
+
+			pesho = Client("Pesho", "Ivanov", {
+				"town": "Sofia",
+				"street": "Nezabravka",
+				"number": 99
+			})
+
+
+			# make maria's account:
+			maria_account = BankAccount(maria, 0, "lv")
+			maria_account.deposit(100)
+
+			# note that everyone can change the "hidden" field:
+			maria_account._BankAccount__balance = 1_000_000
+			maria_account.report()
+
+			# make pesho's account:
+			pesho_account = BankAccount(pesho, 0, "$")
+			pesho_account.deposit(999)
+			pesho_account.report()
+
 		</code></pre>
 	</section>
 </section>
@@ -628,16 +709,6 @@
   		<dt class="note">Assignment never copies data</dt>
   	</dl>
   </section>
-  <section><h3>How assignment works?</h3>
-  	<dl class="fa">
-  		<dt>LHS = RHS</dt>
-  		<dd>The RHS value object is created somewhere in memory</dd>
-  		<dd>The LHS is set to refer to that object</dd>
-  		<!-- <dt>LHS can be variables names or list items or dictionary values and so on.</dt> -->
-  	</dl>
-  	<hr>
-  	<abbr>LHS</abbr><dfn id="LHS"><span>Left </span><span>Hand </span><span>Side </span></dfn>; <abbr>RHS</abbr><dfn id="RHS"><span>Right </span><span>Hand </span><span>Side </span></dfn>
-  </section>
   <section><h3>More on names and values in Python</h3>
   	<dl class="fa">
   		<dt><a href="https://nedbatchelder.com/text/names.html">Facts and myths about Python names and values</a>, 2013 by Ned Batchelder</dt>
@@ -651,14 +722,15 @@
 		<p>Simple, a childish like, explained...</p>
 		<iframe src="https://www.youtube.com/embed/AaIdperUu-A?list=PL6lxxT7IdTxEloArZ2ZSRWCy5jQpD5VtT" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 	</section>
-	<section><h3>garbage collection (reference counting)</h3>
-  	<a href="https://youtu.be/F6u5rhUQ6dU">Watch on youtube: Nina Zakharenko - Memory Management in Python - The Basics - PyCon 2016</a>
+	<section><h3>Nina Zakharenko - Memory Management in Python - The Basics - PyCon 2016</h3>
+	  <iframe width="1280" height="720" src="https://www.youtube.com/embed/F6u5rhUQ6dU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </section>
 </section>
 <section><h2>blogs, tutorials</h2>
 	<section>
 		<dl class="fa">
-			<dt><a href="https://www.python-course.eu/python3_object_oriented_programming.php">Object-Oriented Programming</a> www.python-course.eu</dt>
+			<dt>If you want to go deep in OOP with Python:</dt>
+			<d><a href="https://www.python-course.eu/python3_object_oriented_programming.php">Object-Oriented Programming</a> www.python-course.eu</d>
 		</dl>
 	</section>
 </section>

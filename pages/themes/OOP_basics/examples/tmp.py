@@ -1,31 +1,19 @@
-# methods as messaging mechanism between objects:
-if 1:
-  class Person:
-    def __init__(self,name):
-      self.name = name
+class Person:
+	def __init__(self, name, age):
+		self.name = name
+		self.__age = age
 
-  class Manager(Person):
-    def __init__(self, name):
-      super(Manager, self).__init__(name)
+	def __str__(self):
+		return f"name = {self.name}; __age = {self.__age}"
 
-    def get_report(self, dev):
-      dev.report(self)
+maria = Person("Maria Popova", 25)
 
-  class Developer(Person):
-    def __init__(self, name):
-      super(Developer, self).__init__(name)
+# let's try to change Maria's age:
+maria.__age = 100
+print("maria.__age is set to ", maria.__age)
+print(maria)
 
-    def report(self, manager):
-      print(self.name, "is reporting to", manager.name)
-
-
-
-  maria = Manager("Maria")
-  pesho = Developer("Pesho")
-
-  print( maria.name)
-  print( pesho.name)
-
-  pesho.report(maria)
-  maria.get_report(pesho)
-  # maria.get_report(pesho)
+# # but __age is not hidden! Look:
+maria._Person__age = 100
+print("maria.__age is set to ", maria.__age)
+print(maria)
