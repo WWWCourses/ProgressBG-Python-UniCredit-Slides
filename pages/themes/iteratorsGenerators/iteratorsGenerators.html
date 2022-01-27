@@ -79,21 +79,16 @@
 			<dd>exactly what we've done with loops.</dd>
 			<dt>An <span class="note">iterator</span> is an object that knows how to return items from a collection, <b>one at a time</b>, while keeping track of its current position within that collection.</dt>
 			<dt>An <span class="note">iterable</span> is an object, which has method for returning iterator.</dt>
+			<a href="./images/Iterators-in-Python.jpg"><img src="./images/Iterators-in-Python.jpg" alt="Iterators-in-Python.jpg" style="width: 60vw;"></a>
 		</dl>
 	</section>
-	<section><h3><code class="note">iterator</code> in Python and the <code class="note">__next__</code> method</h3>
+	<section><h3><code class="code">iterator</code> in Python and the <code class="note">__next__</code> method</h3>
 		<dl class="fa">
-			<dt><code class="note">iterator</code> is any object, implementing the <code>__next__</code> method</dt>
+			<dt><code class="code">iterator</code> is any object, implementing the <code>__next__</code> method</dt>
 			<dt>When  <code>__next__</code> method is called, the iterator should return its "next value".</dt>
 			<dt>If the iterator has no more values to return, it should raise a StopIteration exception</dt>
 			<dt>There is a built-in function called <code>next</code>, wrapping around <code>__next__</code> that you can use for convenience.</dt>
 			<dd><code>next(it)</code> is equivalent to <code>it.__next__()</code></dd>
-		</dl>
-	</section>
-	<section><h3>Iterator protocol in Python2 and Python3</h3>
-		<dl class="fa">
-			<dt>in Python 2 an iterator object must have a method called <code>next()</code></dt>
-			<dt>in Python 3 an iterator object must have a method called <code>__next__()</code></dt>
 		</dl>
 	</section>
 	<section><h3><code class="note">iterable</code> in Python and the <code class="note">__iter__</code> method</h3>
@@ -156,18 +151,15 @@
 		</dl>
 	</section>
 	<section><h3>Custom Iterator Types - simplest example</h3>
-		<dt>An example of creating custom (very simple, so - useless) iterator object.</dt>
-		<pre><code rel="Python" class="python">
-			class SimplestNumbersIterator():
+		<dt>An example of creating custom (very simple) iterator object.</dt>
+		<pre><code rel="Python" class="python" style="min-height:80vh">
+			class X():
 				"""Simplest Number Iterator, which can iterate on only two values - 1 and 2."""
-				def __init__(self):
-					self.num = 0
-					self.max = 2
+				def __init__(self, start, end):
+					self.num = start
+					self.max = end
 
-				def __iter__(self):
-					# make the iterator iterable, as well
-					return self
-
+				# define X as Iterator
 				def __next__(self):
 					# generate a number to return
 					if self.num < self.max:
@@ -175,30 +167,29 @@
 						return self.num
 					else:
 						raise StopIteration
+
+				# define X as Iterable
+				def __iter__(self):
+					return self
+
+			# define our custom iterable object:
+			x = X(0,4)
+
+			for el in x:
+				print(el)
+
+			# OUTPUT
+			# 1
+			# 2
+			# 3
+			# 4
 		</code></pre>
 	</section>
-	<!-- <section><h3>Get iterator from iterable</h3>
-		<dl class="fa">
-			<dt>The built-in function <code>iter()</code> can be used to get an iterator from an iterable object.</dt>
-		</dl>
-		<pre><code rel="Python" class="python">
-			iterable = [1,2,3]
-			iterator = iter(iterable)
 
-
-			print( next(iterator) )
-			print( next(iterator) )
-			print( next(iterator) )
-
-			#1
-			#2
-			#3
-		</code></pre>
-	</section> -->
 	<section><h3>Custom Iterator on Fibonacci Sequence -  example</h3>
 		<a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci Sequence @wikipedia</a>
-		<pre><code rel="Python" class="python">
-			class Fibs:
+		<pre><code rel="Python" class="python" style="min-height: 60vh;">
+			class FibNumbers:
 				def __init__(self, limit):
 					self.a = 0
 					self.b = 1
@@ -212,10 +203,13 @@
 				def __iter__(self):
 					return self
 
-			fib_numbers = FibsIterable(30)
+			fib_numbers = FibNumbers(30)
 
 			for i in fib_numbers:
-				print( i )
+				print( i, end=',' )
+
+			# OUTPUT:
+			# 1,1,2,3,5,8,13,21,
 		</code></pre>
 	</section>
 	<section><h3>Resources</h3>
@@ -241,10 +235,11 @@
 		<dl class="fa">
 			<dt>Generators are the primary means by which Python implements so called <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a></dt>
 			<dt>The lazy (on demand) generation of values translates to lower memory usage and (most of the times) in a performance improvement</dt>
+			<a href="./images/generator_vs_normal_function.png"><img src="./images/generator_vs_normal_function.png" alt="generator_vs_normal_function.png" style="width: 50vw;"></a>
 		</dl>
 	</section>
 	<section><h3>How a generator function works?</h3>
-		<dl class="fa" style="font-size: .8em">
+		<dl class="fa">
 			<dt>When a generator function is called, it returns an generator-iterator, that will controls the execution of the generator function.</dt>
 			<dt>When the <code>__next__</code> method of that generator is called, the execution of the function proceeds to the first yield expression,
 			and the execution is "freezed" - the current state of the function is preserved, and the yield value and the he control is transferred to the caller.
@@ -255,19 +250,23 @@
 	</section>
 	<section><h3>Making a Generator</h3>
 		<dt>Creating generator is like creating a normal function, but using <code class="note">yield</code> instead of <code>return</code></dt>
-		<pre><code rel="Terminal" class="shell" data-noescape>
+		<pre><code rel="Python" class="python">
 			def foo_generator():
+				print('generator start')
 				yield 1
 				yield 2
+				print('generator end')
 
 			foo_gen = foo_generator()
 
-			print( next(foo_gen) )
-			print( next(foo_gen) )
+			for x in foo_gen:
+				print(x)
 
 			# OUTPUT
+			# generator start
 			# 1
 			# 2
+			# generator end
 		</code></pre>
 	</section>
 	<section><h3>Custom Generator vs Custom Iterator - example</h3>
