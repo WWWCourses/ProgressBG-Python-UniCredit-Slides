@@ -443,6 +443,29 @@
 
 				class Child(Base1, Base2)
 			</code></pre>
+			<pre><code rel="Example" class="python" style="min-height: 48vh;">
+				class Animal:
+					def eat(self):
+						print(f'{self.name} is eating')
+
+				class Bird:
+					def fly(self):
+						print(f'{self.name} is flying')
+
+				class Parrot(Animal, Bird):
+					def __init__(self, name):
+						self.name = name
+
+				lori = Parrot('Lory')
+				lori.eat()
+				lori.fly()
+
+				# OUTPUT:
+				# Lory is eating
+				# Lory is flying
+
+			</code></pre>
+			<dt>If you want to read more: <a href="https://realpython.com/lessons/multiple-inheritance-python/">Multiple Inheritance in Python @realpython.com</a></dt>
 		</dl>
 	</section>
 </section>
@@ -456,7 +479,7 @@
 			<dt>This is Python’s approach to operator overloading, allowing classes to define their own behavior with respect to language operators</dt>
 			<dt>Setting a special method to None indicates that the corresponding operation is not available</dt>
 		</dl>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 65vh;">
 			class Person():
 				"""docstring for Person"""
 				def __init__(self, name, age):
@@ -484,6 +507,8 @@
 			maria = Employee("maria",20, 2500)
 
 			print("pesho + maria = ", pesho + maria)
+
+			# OUTPUT
 			# pesho + maria =  6000
 		</code></pre>
 	</section>
