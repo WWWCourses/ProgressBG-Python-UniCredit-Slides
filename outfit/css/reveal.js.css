@@ -342,10 +342,14 @@ section.copyright>.license{
 .gist .gist-meta{
   height: 1.5em;
 }
-.gist .gist-meta a:nth-child(1){
+.gist .gist-meta a[style="float:right"]{
   color: #0ebeff;
   font-size: 1.5em;
-  animation: pulse 2s infinite;
+  animation: pulse 2s linear infinite;
+}
+
+.gist .gist-meta a[style="float:right"]:after{
+  content:' code'
 }
 
 @keyframes pulse {
