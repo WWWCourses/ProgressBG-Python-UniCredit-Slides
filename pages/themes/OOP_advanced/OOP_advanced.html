@@ -222,7 +222,7 @@
 </section>
 
 <section id="normalMethodVsClassMethodVsStaticMethod"><h1>"Normal" Method vs Class Method vs Static Method</h1></section>
-<section><h1>"Normal" Method vs Class Method vs Static Method</h1>
+<section><h1>"Normal" Instance Method vs Class Method vs Static Method</h1>
 	<pre><code rel="Python" class="python">
 		class A():
 			@staticmethod
@@ -258,100 +258,150 @@
 			<dt>The mechanism of Inheritance allows programmers to create classes that are built upon existing classes</dt>
 			<dt>Python supports <em>class-based inheritance</em></dt>
 			<dt>I.e. inheritance allows a new class (<b>Derived class</b>) to be build upon existing class ( called <b>Super</b> or <b>Base</b>) class, extending (if needed) its behaviour</dt>
-		</dl>
-	</section>
-	<section><h3>Syntax</h3>
-		<pre><code rel="Python" class="python">
-			class DerivedClassName(BaseClassName):
-				pass
-		</code></pre>
-		<dl class="fa">
+			<pre><code rel="Syntax" class="python">
+				class BaseClassName:
+					pass
+
+				class DerivedClassName(BaseClassName):
+					pass
+			</code></pre>
 			<dt>The name BaseClassName must be defined in a scope containing the derived class definition</dt>
 		</dl>
 	</section>
 	<section><h3>Example</h3>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 60vh;">
 			class Person():
 				"""docstring for Person"""
 				def __init__(self, name, age):
-					self.name = name
-					self.age = age
+						self.name = name
+						self.age = age
 
-				def __str__(self):
-					return "{} is {} years old".format(self.name, self.age)
+				def greet(self):
+						print(f"Hello, I'm {self.name}. I'm {self.age} years old.")
 
 			class Employee(Person):
 				pass
 
 			pesho = Employee("Pesho",25)
 
-			print(pesho)
+			# Employee instances doesn't have any own attributes and methods, but they inherit from their base class - Person.
+			pesho.greet()
+
+
+			# OUTPUT:
+			# Hello, I'm Pesho. I'm 25 years old.
 		</code></pre>
 	</section>
 	<section><h3>Inheritance mechanism</h3>
 		<dl class="fa">
-			<dt>If a requested attribute is not found in the child class, the search proceeds to look in the base class.</dt>
+			<dt>If a requested attribute/method is not found in the child class, the search proceeds to look in the parent class.</dt>
 			<dt>This rule is applied recursively if the base class itself is derived from some other class.</dt>
-			<dt>Derived classes may override methods of their base classes</dt>
+			<dt>Derived classes may override methods of their base classes. I.e. they may have their own implementation of methods, existing in base class.</dt>
 		</dl>
 	</section>
 	<section><h3>Method overriding</h3>
 		<dl class="fa">
 			<dt>Derived classes may override methods of their base classes.</dt>
 		</dl>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 70vh;">
 			class Person():
 				"""docstring for Person"""
 				def __init__(self, name, age):
-					self.name = name
-					self.age = age
+						self.name = name
+						self.age = age
 
-				def __str__(self):
-					return "{} is {} years old".format(self.name, self.age)
+				def greet(self):
+						print(f"Hello, I'm {self.name}. I'm {self.age} years old.")
 
 			class Employee(Person):
-				def __str__(self):
-					return "{} is  employee".format(self.name)
+				def greet(self):
+								print(f'Name: {self.name}, age: {self.age}')
+
 
 			maria = Person("Maria", 20)
 			pesho = Employee("Pesho",25)
 
-			print(maria)
-			print(pesho)
+			maria.greet()
+			pesho.greet()
+
+			# OUTPUT:
+			# Hello, I'm Maria. I'm 20 years old.
+			# Name: Pesho, age: 25
+
 		</code></pre>
 	</section>
 	<section><h3>Direct access to base methods</h3>
-		<p>We can call the base class method directly</p>
+		<dl class="fa">
+			<dt>We can call a base class method directly from the derived class, in order to reuse functionality:</dt>
+		</dl>
 		<pre><code rel="Python" class="python">
+			# in a derived class we can call a base method.
+			# note, that the self reference must be passed explicitly to the base class method
 			BaseClass.method(self, arguments)
 		</code></pre>
-		<pre><code rel="Python" class="python">
+		<pre><code rel="Python" class="python" style="min-height: 75vh">
 			class Person():
-				"""docstring for Person"""
 				def __init__(self, name, age):
 					self.name = name
 					self.age = age
 
-				def __str__(self):
-					return "{} is {} years old".format(self.name, self.age)
+				def greet(self):
+					print(f"Hello, I'm {self.name}. I'm {self.age} years old.")
 
 			class Employee(Person):
-				"""docstring for Employee"""
 				def __init__(self, name, age, salary):
+					# call the base class constructor:
 					Person.__init__(self,name,age)
+
+					# now init own attributes:
 					self.salary = salary
 
+				def greet(self):
+					print(f'Name: {self.name}, age: {self.age}, salary: {self.salary}')
 
-			pesho = Employee("Pesho",25, 3500)
-			print(pesho)
+
+			maria = Person("Maria", 20)
+			pesho = Employee("Pesho",25, 4800)
+
+			maria.greet()
+			pesho.greet()
+
+			# OUTPUT:
+			# Hello, I'm Maria. I'm 20 years old.
+			# Name: Pesho, age: 25, salary: 6800
 		</code></pre>
 	</section>
 	<section><h3><code>super()</code> access to base methods</h3>
-		<p>When we need to access inherited methods that have been overridden in a class, it's preffered to use <code>super()</code></p>
-		<pre><code rel="Syntax" class="python">
-			class C(B):
-					def method(self, arg):
-							super().method(arg)
+		<dl class="fa">
+			<dt>super() lets you avoid referring to the base class explicitly, as well as passing the self reference explicitly.</dt>
+			<dt>When we need to access inherited methods that have been overridden in a class, it's preffered to use <code>super()</code></dt>
+		</dl>
+		<pre><code rel="Syntax" class="python" style="tab-size: 8;">
+			class Child(Base):
+				def method(self, arg):
+					# call Base method implicitly senging self refenrece:
+					super().method(arg)
+		</code></pre>
+		<pre><code rel="Python" class="python" style="min-height: 50vh;">
+			class Base:
+				def __init__(self):
+					print('Base instance created!')
+
+				def foo(self):
+					print(f'foo() in Base is called! Working on {self.name}')
+
+			class Child1(Base):
+				def __init__(self, name):
+					self.name = name
+
+					# call Base foo() method. Reference to self is passed implicitly
+					super().foo()
+
+
+			ch1 = Child1('ch1')
+
+			# OUTPUT
+			# foo() in Base is called! Working on ch1
 		</code></pre>
 	</section>
 	<section><h3><code>super()</code> access to base methods - example</h3>
@@ -379,6 +429,21 @@
 			pesho = Employee("Pesho",25, 3500)
 			print(pesho)
 		</code></pre>
+	</section>
+</section>
+
+<section data-min="5"><h1>Multiple Inheritance</h1></section>
+<section><h2 class="advanced">Multiple Inheritance</h2>
+	<section>
+		<dl class="fa">
+			<dt>A class can inherit not only from one, but from many parents.</dt>
+			<pre><code rel="Syntax" class="python" style="tab-size: 4;">
+				class Base1:pass
+				class Base2:pass
+
+				class Child(Base1, Base2)
+			</code></pre>
+		</dl>
 	</section>
 </section>
 
@@ -619,7 +684,7 @@
 				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() {hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
 				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
 				{ src: '/ProgressBG-Python-UniCredit-Slides/lib/reveal.js/plugin/notes/notes.js', async: true }
 			]

@@ -1,28 +1,16 @@
-class Person():
-  @staticmethod
-  def validate_age():
-    if not 0 < age < 100:
-      raise ValueError("Invalid age value")
+class Base:
+	def __init__(self):
+		print('Base instance created!')
 
-  def __init__(self, name, age):
-    self.name = name
-    self.age = age
+	def foo(self):
+		print(f'foo() in Base is called! Working on {self.name}')
 
-    self.increment_counter()
-    # attach count to an object
-    self.count = Person.count
+class Child1(Base):
+	def __init__(self, name):
+		self.name = name
 
-
-  def __str__(self):
-    return "{}. {}: {}".format(self.count, self.name, self.age)
+		# call Base foo() method. Reference to self is passed implicitly
+		super().foo()
 
 
-maria = Person("Maria", 20)
-pesho = Person("Pesho", 30)
-
-print(maria)
-print(pesho)
-
-# obviously, we would not want that. So, be careful with class methods!
-maria.increment_counter()
-pesho.increment_counter()
+ch1 = Child1('ch1')
