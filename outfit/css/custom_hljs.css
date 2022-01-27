@@ -21,6 +21,7 @@
 	padding-bottom: .3em;
 	padding-right: 0;
 	line-height: 1.1em;
+	tab-size: 4;
 }
 code[rel]::before{
 	content: attr(rel);
