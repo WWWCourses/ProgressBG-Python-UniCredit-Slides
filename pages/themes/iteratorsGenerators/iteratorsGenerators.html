@@ -253,8 +253,11 @@
 		<pre><code rel="Python" class="python">
 			def foo_generator():
 				print('generator start')
+
+				# yield is almost like return, but it freezes the execution
 				yield 1
 				yield 2
+
 				print('generator end')
 
 			foo_gen = foo_generator()
@@ -269,56 +272,79 @@
 			# generator end
 		</code></pre>
 	</section>
-	<section><h3>Custom Generator vs Custom Iterator - example</h3>
-		<p class="note">The Iterator way:</p>
-		<pre><code rel="Python" class="python">
-			class SimplestNumbersIterator():
-				"""Simplest Number Iterator, which can iterate on only two values - 1 and 2.
-
-					Disclaimer: Use it just to trace how __next__ and __iter__ operators works.This example is not useful in real world!
-				"""
-				def __init__(self):
-					self.num = 0
-					self.max = 2
-
-				def __iter__(self):
-					return self
-
-				def __next__(self):
-					# generate a number to return
-					if self.num < self.max:
-						self.num += 1
-						print("Iterate on", self.num)
-						return self.num
-					else:
-						raise StopIteration
-		</code></pre>
-		<p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p>
+	<section><h3>Resources</h3>
+		<dl class="fa">
+			<dt><a href="https://www.python.org/dev/peps/pep-0255/" class="advanced">PEP 255 -- Simple Generators</a></dt>
+			<dt><a href="https://wiki.python.org/moin/Generators">Generators @python wiki</a></dt>
+		</dl>
 	</section>
-	<section><h3>Custom Generator vs Custom Iterator - example</h3>
+</section>
+
+<section data-min="5"><h1>Examples</h1></section>
+<section><h2>Examples</h2>
+	<section><h3>Custom Generator vs Custom Iterator - Iterator example</h3>
+		<p class="note">The Iterator way:</p>
+		<pre><code rel="Python" class="python" style="min-height: 70vh;">
+			class SimplestNumbersIterable():
+			"""SimplestNumberIterable, which can iterate on only two values - 1 and 2."""
+			def __init__(self):
+				self.num = 0
+				self.max = 2
+
+			def __iter__(self):
+				return self
+
+			def __next__(self):
+				# generate a number to return
+				if self.num < self.max:
+					self.num += 1
+					print("Iterate on", self.num)
+					return self.num
+				else:
+					raise StopIteration
+
+
+			sni = SimplestNumbersIterable()
+
+			for el in sni:
+				print(el)
+
+			# OUTPUT:
+			# Iterate on 1
+			# 1
+			# Iterate on 2
+			# 2
+
+		</code></pre>
+		<!-- <p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p> -->
+	</section>
+	<section><h3>Custom Generator vs Custom Iterator - Generator example</h3>
 		<p class="note">The Generator way:</p>
 		<pre><code rel="Python" class="python">
 			def simplest_numbers_generator():
-				"""Simplest Number Generator, yielding only two values - 1 and 2.
-
-					Disclaimer: Use it just to trace how next and yield operators works.
-											This example is not useful in real world!
-				"""
+				"""simplest_numbers_generator, yielding only two values - 1 and 2."""
 				num = 1
-				print("Yielding", num)
-				yield num
 
-				num +=1
-				print("Yielding", num)
-				yield 2
+				while num<=2:
+					print("Yielding", num)
+					yield num
+					num+=1
 
-				num +=1
-				print("Yielding", num)
-				print("Sory, there is nothing to yield...")
+
+			sng = simplest_numbers_generator()
+
+			for el in sng:
+				print(el)
+
+			# OUTPUT
+			# Yielding 1
+			# 1
+			# Yielding 2
+			# 2
 		</code></pre>
-		<p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p>
+		<!-- <p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p> -->
 	</section>
-	<section><h3>Example - even numbers generator</h3>
+	<section><h3>Example - integer numbers generator in range</h3>
 		<pre><code rel="Python" class="python">
 			#define the generator function:
 			def numbers_generator(start,end):
@@ -347,15 +373,10 @@
 			print( list(flatten(nested)) )
 		</code></pre>
 	</section>
-	<section><h3>Example - iterator for random "name" like Cyrillic strings</h3>
-		<p>Naive generation of random "name" like Cyrillic strings</p>
-		<a href="https://repl.it/@IvaPopova/naiverandomnamesiterator">naive_random_names_iterator @repl.it</a>
-	</section>
-	<section><h3>Resources</h3>
-		<dl class="fa">
-			<dt><a href="https://www.python.org/dev/peps/pep-0255/" class="advanced">PEP 255 -- Simple Generators</a></dt>
-			<dt><a href="https://wiki.python.org/moin/Generators">Generators @python wiki</a></dt>
-		</dl>
+	<section><h3>Iterable on random generated cyrillic "names"</h3>
+
+		<script src="https://gist.github.com/WWWCourses/d61926a6b3dfd2c29e0be29b5b96520d.js"></script>
+		<!-- <a href="https://repl.it/@IvaPopova/naiverandomnamesiterator">naive_random_names_iterator @repl.it</a> -->
 	</section>
 </section>
 
@@ -427,13 +448,7 @@
 	</section>
 </section>
 
-<section><h3>Submission</h3>
-	<dl class="fa">
-		<dt>Please, prefix your filenames/archive with your name initials, before sending.</dt>
-		<dd>For instance: <b>iep_task1.py</b> or <b>iep_tasks.rar</b></dd>
-		<dt>Send files to <a href="mailto:progressbg.python.course@gmail.com?Subject=HW:iteratorsGenerators">progressbg.python.course@gmail.com</a></dt>
-	</dl>
-</section>
+
 
 <section class="disclaimer" data-background="/ProgressBG-Python-UniCredit-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>
