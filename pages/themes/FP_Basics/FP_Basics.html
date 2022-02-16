@@ -162,45 +162,45 @@
 			greet()
 		</code></pre>
 	</section>
-	<section><h3>the @ syntactic sugar - syntax</h3>
+	<section><h3>the @ syntactic sugar</h3>
 		<dl class="fa" style="font-size: .8em">
 			<dt>Python provides a simple syntax (<code>@decorator_name</code>) for calling higher-order functions.</dt>
 			<dt>A function decorator, with @ syntax, can be regarded as a "syntactic sugar" for a function that takes a function and returns a function</dt>
-		</dl>
-		<pre><code rel="Syntax" class="shell" data-noescape>
-			#define the decorator:
-			def decorator():
-				pass
+			<pre><code rel="Syntax" class="shell" data-noescape>
+				#define the decorator:
+				def decorator():
+					pass
 
-			# define a function to be decorated:
-			@decorator
-			def decorated():
-				pass
+				# define a function to be decorated:
+				@decorator
+				def decorated():
+					pass
 
-			# just call the decorated function:
-			decorated()
-		</code></pre>
+				# just call the decorated function:
+				decorated()
+			</code></pre>
+			<dt>Example:</dt>
+			<pre><code rel="Python" class="python">
+				#define the decorator:
+				def stars_decorator(f):
+					def wrapper():
+						print("*" * 50)
+						f()
+						print("*" * 50)
+
+					return wrapper
+
+				# let's decorate greet:
+				@stars_decorator
+				def greet():
+					print("Howdy World!")
+
+				# and use it:
+				greet()
+			</code></pre>
+
 	</section>
-	<section><h3>the @ syntactic sugar - example</h3>
-		<pre><code rel="Python" class="python">
-			#define the decorator:
-			def stars_decorator(f):
-				def wrapper():
-					print("*" * 50)
-					f()
-					print("*" * 50)
 
-				return wrapper
-
-			# let's decorate greet:
-			@stars_decorator
-			def greet():
-				print("Howdy World!")
-
-			# and use it:
-			greet()
-		</code></pre>
-	</section>
 	<section><h3 class="advanced">Decorator Pattern in Python - example with arguments</h3>
 		<p>What about if we want the decorated function to take some arguments?</p>
 		<pre><code rel="Python" class="python">
@@ -256,169 +256,221 @@
 		<dl class="fa">
 			<dt>Lambda expressions in Python are used to create short (one-line), anonymous functions.</dt>
 			<dt>Lambda expressions creates a function	that does	not	use	<code>def</code>	and <code>return</code>.</dt>
-			<dt>The "body" of lambda can contain only single expression.</dt>
-			<dt>They are generally	used	with	reduce(	),	filter(	),	and	maps() - as discussed further, or as arguments to other functions - typical for Functional Programming paradigm.</dt>
+			<dt>The "body" of lambda function can contain only single expression.</dt>
+			<dt>Lambda functions are generally	used	with	reduce(	),	filter(	),	and	maps() - as discussed further, or as arguments to other functions - typical for Functional Programming paradigm.</dt>
 		</dl>
 	</section>
 	<section><h3>Syntax</h3>
-		<p>Lamda functions are defined by:</p>
-		<pre><code rel="Python" class="python">
-			lambda	parameter_list: expression
-		</code></pre>
-		<p>which is equivalent to </p>
-		<pre><code rel="Python" class="python">
-			def some_func(arguments):
-				return expression
-		</code></pre>
-		<p>but without a name</p>
-	</section>
-	<section><h3>simple example</h3>
-		<p style="font-size: .8em">Note, that in bellow examples, lambda functions are assigned to variables, just to demonstrate the lambda syntax in simplest context. <span class="note">This is not Pythonic - lambdas should be used as anonymous functions</span>. And we will see real lambda usage in next slides.</p>
-		<pre><code rel="Python" class="python">
-			l = lambda x,y:x+y
-			print( l(2,3) )
+		<dl class="fa">
+			<dt>Lamda functions are defined by:</dt>
+			<pre><code rel="Python" class="python">
+				lambda parameter_list: expression
+			</code></pre>
+			<dt>which is equivalent to</dt>
+			<pre><code rel="Python" class="python">
+				def some_func(parameter_list):
+					return expression
+			</code></pre>
+			<dt>Note, that in next example, the lambda function is assigned to a variable just to demonstrate the lambda syntax in simplest context. This is not Pythonic - lambdas are usually used as anonymous functions.</dt>
+			<pre><code rel="Python" class="python">
+				l = lambda x,y:x+y
+				print( l(2,3) )
 
-			maxnum = lambda x,y: x if x>y else y
-			print( maxnum(30,40) )
-		</code></pre>
+				maxnum = lambda x,y: x if x>y else y
+				print( maxnum(30,40) )
+			</code></pre>
+			<dt>Next example demonstrate a more Pythonic use of lambda function:</dt>
+			<pre><code rel="Python" class="python">
+				calc = {
+					'add': lambda x,y:x+y,
+					'del': lambda x,y:y!=0 and x/y,
+				}
+
+				print( calc['add'](2,3) )
+				print( calc['del'](2,3) )
+			</code></pre>
+		</dl>
 	</section>
+
 </section>
 
 <section><h1>The <code>filter()</code> Function</h1></section>
 <section><h2>The <code>filter()</code> Function</h2>
-	<section><h3>Syntax</h3>
+	<section>
+		<a href="./images/filter.png"><img src="./images/filter.png" alt="./images/filter.png"></a>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt><a href="https://docs.python.org/3/library/functions.html#filter"><code>filter()</code></a> is a built-in function that allows to process an iterable and extract those items that satisfy a given condition</dt>
+		</dl>
 		<pre><code rel="Syntax" class="shell" data-noescape>
 			filter(<em>function</em>, <em>iterable</em>)
 		</code></pre>
 		<dl class="fa">
-			<dt><em>function</em> - a function definition. Note, that you must not call the function!</dt>
+			<dt><em>function</em> - a function definition.</dt>
 			<dt><em>iterable</em> - a sequence (list, tupple, range or string) or container which supports iteration, or an iterator.</dt>
 			<dt><em>Function</em> should return a Boolean value. It is called for each item in the sequence and if it returns False, the item will be filtered</dt>
+			<dt>Example: List of even numbers - without lambda</dt>
+			<pre><code rel="Python" class="python">
+				def is_even(x):
+					return True if x!=0 and x%2==0 else False
+
+				even_numbers = filter(is_even, range(10))
+
+				print( list(even_numbers) )
+
+				# [2, 4, 6, 8]
+			</code></pre>
+			<dt>Example: List of even numbers - with lambda</dt>
+			<pre><code rel="Python" class="python">
+				even_numbers = filter(lambda x: x%2==0 if x!=0 else False, range(10))
+
+				print( list(even_numbers) )
+			</code></pre>
 		</dl>
 	</section>
-	<section><h3>Example: List of even numbers - without lambda</h3>
-		<pre><code rel="Python" class="python">
-			def is_even(x):
-			  return True if x!=0 and x%2==0 else False
+	<section><h3>More examples</h3>
+		<dl class="fa">
+			<dt>Example: filter empty strings</dt>
+			<pre><code rel="Python" class="python">
+				names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
+				not_empty_names = filter(lambda s: s, names)
 
-			even_numbers = filter(is_even, range(10))
+				print( list(not_empty_names) )
+			</code></pre>
+			<dt>Example: Names, starting with 'A'</dt>
+			<pre><code rel="Python" class="python">
+				names = ["Ivan", "Alex", "Maria", "Angel", ""]
+				filtered_names = filter(lambda s: s and s[0]=="A", names)
 
-			print( list(even_numbers) )
+				print( list(filtered_names) )
+			</code></pre>
+			<dt>Note that we can use list comprehenstions insead of filter</dt>
+			<pre><code rel="Python" class="python">
+				names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
+				not_empty_names = [ name for name in names if name]
 
-			# [2, 4, 6, 8]
-		</code></pre>
-	</section>
-	<section><h3>Example: List of even numbers - with lambda</h3>
-		<pre><code rel="Python" class="python">
-			even_numbers = filter(lambda x: x%2==0 if x!=0 else False, range(10))
-
-			print( list(even_numbers) )
-		</code></pre>
-	</section>
-	<section><h3>Example: filter empty strings - with lambda</h3>
-		<pre><code rel="Python" class="python">
-			names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
-			not_empty_names = filter(lambda s: s, names)
-
-			print( list(not_empty_names) )
-		</code></pre>
-	</section>
-	<section><h3>Example: Names, starting with 'A' - with lambda</h3>
-		<pre><code rel="Python" class="python">
-			names = ["Ivan", "Alex", "Maria", "Angel", ""]
-			filtered_names = filter(lambda s: s and s[0]=="A", names)
-
-			print( list(filtered_names) )
-		</code></pre>
+				print( list(not_empty_names) )
+			</code></pre>
+		</dl>
 	</section>
 </section>
 
 <section><h1>The <code>map()</code> Function</h1></section>
 <section><h2>The <code>map()</code> Function</h2>
+	<section>
+		<a href="./images/map_function.png"><img src="./images/map_function.png" alt="./images/map_function.png"></a>
+	</section>
 	<section><h3>Syntax</h3>
-		<pre><code rel="Syntax" class="shell" data-noescape>
-			map(<em>function</em>, <em>iterable</em>, ...)
-		</code></pre>
 		<dl class="fa">
-			<dt><em>function</em> - a function definition. Note, that you must not call the function!</dt>
+			<dt><a href="https://docs.python.org/3/library/functions.html#map"><code>map()</code></a> return an iterator that applies function to every item of iterable, yielding the results</dt>
+			<pre><code rel="Syntax" class="shell" data-noescape>
+				map(<em>function</em>, <em>iterable</em>, ...)
+			</code></pre>
+			<dt><em>function</em> - a function definition.</dt>
 			<dt><em>iterable</em> - a sequence (list, tupple, range or string) or container which supports iteration, or an iterator. <span>Note, that you can pass multiple <em>iterables</em></span>!</dt>
 			<dt>map() applies the function to all the elements of the <em>iterable</em>. And returns a new <em>iterable</em> with the elements changed by the <em>function</em>.</dt>
+			<hr>
+			<dt>Example: map list of numbers to list of squared numbers</dt>
+			<pre><code rel="Python" class="python">
+				numbers = [1,2,3,4,5]
+
+				sqr_numbers = map(lambda x:x**2, numbers)
+
+				print( list(sqr_numbers) )
+
+				#[1, 4, 9, 16, 25]
+			</code></pre>
 		</dl>
 	</section>
-	<section><h3>Example: numbers => squared numbers</h3>
-		<p>map numbers in a list to a list of squared numbers:</p>
-		<pre><code rel="Python" class="python">
-			numbers = [1,2,3,4,5]
-
-			sqr_numbers = map(lambda x:x**2, numbers)
-
-			print( list(sqr_numbers) )
-
-			#[1, 4, 9, 16, 25]
-		</code></pre>
-	</section>
-	<section><h3>Example: Generate all uppercase cyrillic letters by their UTF codes</h3>
-		<pre><code rel="Python" class="python">
-			letters = map(chr, range(1040, 1072))
-			print( list(letters) )
-
-			#['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
-		</code></pre>
-	</section>
-	<section><h3>Example: feed map() with multiple iterables</h3>
+	<section><h3>Examples</h3>
 		<dl class="fa">
-			<dt>If we pass to map N iterables, then it will feed the <em>function</em> with N arguments, each from the respective iterable.</dt>
+			<dt>Example: Generate all uppercase cyrillic letters by their UTF codes</dt>
+			<pre><code rel="Python" class="python">
+				letters = map(chr, range(1040, 1072))
+				print( list(letters) )
+
+				#['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+			</code></pre>
+			<dt>Above example can be done with list comprehenstions, as well:</dt>
+			<pre><code rel="Python" class="python">
+				letters = [chr(code) for code in range(1040, 1072)]
+				print( list(letter
+
+				#['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+			</code></pre>
+			<dt>Example: feed map() with multiple iterables. Note that this example can not be done easilly with list comprehensions </dt>
+			<pre><code rel="Python" class="python">
+				l1 = [1,2,3]
+				l2 = [1,2,3]
+
+				l_sum = map(lambda a,b: a+b, l1, l2)
+				print( list(l_sum) )
+
+				# [2, 4, 6]
+			</code></pre>
 		</dl>
-		<pre><code rel="Python" class="python">
-			l1 = [1,2,3]
-			l2 = [1,2,3]
-
-			l_sum = map(lambda a,b: a+b, l1, l2)
-			print( list(l_sum) )
-
-			# [2, 4, 6]
-		</code></pre>
 	</section>
 </section>
 
 <section><h1>The <code>reduce()</code> Function</h1></section>
 <section><h2>The <code>reduce()</code> Function</h2>
-	<section><h3><code>reduce()</code> in Python2 and Python3</h3>
+	<section>
+		<a href="./images/reduce.png"><img src="./images/reduce.png" alt="./images/reduce.png" style="height:60vh"></a>
+	</section>
+	<section>
 		<dl class="fa">
-			<dt class="note">In Python3 you must import reduce from <code>functools</code> module!</dt>
-			<dd><code>from functools import reduce</code></dd>
-			<dt>In Python2, you can use reduce without importing anything.</dt>
-		</dl>
-	</section>
-	<section><h3>Syntax</h3>
-		<pre><code rel="Syntax" class="shell" data-noescape>
-			reduce(<em>function</em>, <em>iterable</em>)
-		</code></pre>
-		<dl class="fa" style="font-size: .8em">
-			<dt><em>function</em> - a function definition. Note, that you must not call the function!</dt>
+			<dt><a href="https://docs.python.org/3/library/functools.html#functools.reduce"><code>reduce()</code></a> allows us to apply a function to an iterable and reduce it to a single cumulative value</dt>
+			<pre><code rel="Syntax" class="shell" data-noescape>
+				from functools import reduce
+
+				reduce(<em>function</em>, <em>iterable</em>[, <em>initializer</em>])
+			</code></pre>
+			<dt class="note">In Python3, reduce() is not built-in, but we must import it from <code>functools</code> module!</dt>
+			<dt><em>function</em> - a function definition.The first argument passed to <em>function</em> is the accumulated value and the second argument is the update value from the sequence</dt>
+			<dd><code>reduce(lambda x, y: x+y, [1, 2, 3, 4, 5])</code> calculates ((((1+2)+3)+4)+5)</dd>
 			<dt><em>iterable</em> - a sequence (list, tupple, range or string) or container which supports iteration, or an iterator (will be discussed in further topics).</dt>
-			<dt>Applys <em>function</em> of two arguments cumulatively to the items of sequence, from left to right, so as to reduce the sequence to a single value.</dt>
-			<dt>The first argument is the accumulated value and the second argument is the update value from the sequence</dt>
-			<dd><code>reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates ((((1+2)+3)+4)+5).</code></dd>
+			<dt>If the optional initializer is present, it is placed before the items of the iterable in the calculation, and serves as a default when the iterable is empty</dt>
+			<dd><code>reduce(lambda x, y: x+y, [1, 2, 3, 4, 5], 100)</code> calculates (((((100+1)+2)+3)+4)+5)</dd>
 		</dl>
 	</section>
-	<section><h3>Example: sum the numbers from 0 to 10, including</h3>
-		<pre><code rel="Python" class="python">
-			from functools import reduce
+	<section><h3>Examples</h3>
+		<dl class="fa">
+			<dt>Example: sum the numbers from 0 to 10, including</dt>
+			<pre style="width: 80vw;"><code rel="Python" class="python">
+				from functools import reduce
 
-			res = reduce(lambda a,b: a+b, range(11))
+				res = reduce(lambda a,b: a+b, range(11))
 
-			print(res)
+				print(res)
 
-			#55
-		</code></pre>
+				#55
+			</code></pre>
+			<dt>Example: sum the prices of all products</dt>
+			<pre style="width: 80vw;"><code rel="Python" class="python">
+				products = [
+					{'name':'apples', 'price': 2},
+					{'name':'oranges', 'price': 5},
+					{'name':'bananas', 'price': 3},
+				]
+
+				#note that here we must provide initializer
+				total_price = reduce( lambda curr_price, product:curr_price+product['price'], products, 0)
+
+				print(total_price)
+			</code></pre>
+		</dl>
 	</section>
 	<section><h3 class="advanced">Example: map - reduce</h3>
-		<p>Sum variable number of lists items positionally</p>
+		<dl class="fa">
+			<dt>Often in practice filter, map and reduce are used in combination</dt>
+			<dt>Consider next example, which returns the sum of variable number of lists items positionally</dt>
+		</dl>
 		<pre><code rel="Python" class="python">
 			l1 = [1,2,3]
 			l2 = [1,2,3]
 			l3 = [1,2,3]
+
 			l = map(lambda *t: reduce(lambda a,b: a+b, t) , l1, l2,l3)
 			print( list(l) )
 
@@ -427,22 +479,45 @@
 	</section>
 </section>
 
-<!-- <section id="hw"><h1>Exercises</h1></section>
-<section><h2>Task1: Task1Title</h2>
+<section id="hw"><h1>Exercises</h1></section>
+<section><h2>Task1: get_names_with_posistive_balance</h2>
 	<section><h3>The Task</h3>
 		<dl class="fa">
-			<dt></dt>
+			<dt>Create a list of all user names, which have positive balance</dt>
 		</dl>
+		<pre><code rel="Python" class="python">
+			users = [
+				{'name':'Maria', 'balance': 2000},
+				{'name':'Petar', 'balance': -189},
+				{'name':'Ivan', 'balance': 3200},
+				{'name':'Asen', 'balance': -2890},
+			]
+
+			# YOUR CODE here
+
+			# EXPECTED OUTPUT:
+			['Maria', 'Ivan']
+		</code></pre>
 	</section>
 </section>
-
-<section><h3>Submition</h3>
+<section><h2>Task2: map_filter_words_in_quotes</h2>
 	<dl class="fa">
-		<dt>Please, prefix your filenames/archive with your name initials, before sending.</dt>
-		<dd>For instance: <b>iep_task1.py</b> or <b>iep_tasks.rar</b></dd>
-		<dt>Send files to <a href="mailto:progressbg.python.course@gmail.com?Subject=HW:acad_to_astro_hours">progressbg.python.course@gmail.com</a></dt>
+		<dt>Next list of Douglas Adams quotes is given:</dt>
+		<pre><code rel="Python" class="python">
+			quotes = [
+				'Nothing travels faster than the speed of light, with the possible exception of bad news, which obeys its own special laws',
+				'A common mistake that people make when trying to design something completely foolproof is to underestimate the ingenuity of complete fools.'
+			]
+		</code></pre>
+		<dt>Write a program which will output in the console only the words that starts with letter 't' and are longer than 3 symbols</dt>
+		<pre><code rel="Expected Ourput" class="python">
+			TRAVELS
+			THAN
+			THAT
+			TRYING
+		</code></pre>
 	</dl>
-</section> -->
+</section>
 
 
 

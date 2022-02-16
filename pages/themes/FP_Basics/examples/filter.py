@@ -13,8 +13,9 @@
 
 """ filter empty strings """
 names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
-not_empty_names = filter(lambda s: s, names)
-
+# not_empty_names = filter(lambda s: s, names)
+# with list comprehensions
+# not_empty_names = [ name for name in names if name]
 print( list(not_empty_names) )
 
 
