@@ -49,7 +49,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Organizing code: more on importing modules</h1></section>
+<section><h1>Organizing code: imports, modules, packages</h1></section>
 <section data-transition="zoom">
 	<!-- linkedin badge -->
 	<!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
@@ -80,27 +80,28 @@
 		<dl class="fa">
 			<dt>Modules allows to split a long program into several files</dt>
 			<dd>for instance - to put function/class definitions in one or more files, and the main program to be written in a separate file.</dd>
-		</dl>
-	</section>
-	<section><h3>Python modules</h3>
-		<dl class="fa">
-			<dt class="note">Module == Python file</dt>
 			<dt>Each module creates its own namespace.</dt>
-			<dt>A module can contain definitions, as well as executable statements</dt>
+			<dt>A module is a Python file containing definitions and statements.</dt>
+			<dd class="note">Module == Python file</dd>
+
+			<pre><code rel="Terminal" class="shell" data-noescape>
+				├── my_app
+				│   ├── app.py           # the main file
+				│   ├── helper_module.py # a module file
+			</code></pre>
 		</dl>
-	</section>
-	<section><h3>Creating a custom Python module</h3>
-		<p>Its just simple as creating a Python file - do not forget the <span class="note">.py extension</span></p>
-		<pre><code rel="Terminal" class="shell" data-noescape>
-			├── my_app
-			│   ├── app.py           # the main file
-			│   ├── helper_module.py # a module file
-		</code></pre>
 	</section>
 	<section><h3>Import module: <code class="note">import <em>X</em></code></h3>
 		<dl class="fa">
 			<dt>To use a module, you have to import it first.</dt>
 			<dt>As a module generates its own namespace, you have to prefix the imported names with the module name:</dt>
+			<pre><code rel="helper_module.py" class="python">
+				def get_user_name():
+					return input('Enter your name:')
+
+				def greet(user_name):
+					print(f'Hello, {user_name}!')
+			</code></pre>
 			<pre><code rel="app.py" class="python">
 				# import the helper_module:
 				import helper_module
@@ -109,6 +110,13 @@
 				user_name = helper_module.get_user_name()
 				helper_module.greet(user_name)
 			</code></pre>
+		</dl>
+	</section>
+	<section><h3>Module Execution</h3>
+		<dl class="fa">
+			<dt>A module can contain executable statements as well as function definitions. Usually these statements are intended to initialize the module.</dt>
+			<dt>Statements in a module are executed only the first time the module name is encountered in an import statement.</dt>
+			<dt>But as a module is just a Python file, we can execute it as a standalone program.</dt>
 		</dl>
 	</section>
 	<section><h3>Module alias: <code class="note">import X as Y</code></h3>
@@ -182,77 +190,40 @@
 	<section><h3>Python's third-party modules</h3>
 		<dl class="fa">
 			<dt>The Python Packaging Index <a href="https://pypi.python.org/pypi">PyPI</a>is a public repository of open source licensed packages made available for use by other Python users.</dt>
-			<dt><a href="https://docs.python.org/3/installing/">Installing Python Modules @python3 docs</a></dt>
-			<dt><a href="https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments">Creating Virtual Environments</a></dt>
-			<dt><a href="https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies"></a>Managing Application Dependencies</dt>
+			<dt>We are going to see how to install third-party modules after we get familiar with Python's Virtual Environments</dt>
+			<!-- <dt><a href="https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments">Creating Virtual Environments</a></dt>
+			<dt><a href="https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies"></a>Managing Application Dependencies</dt> -->
 		</dl>
 	</section>
 </section>
-
-<section><h1>Packages in Python</h1></section>
-<section><h2>Packages in Python</h2>
-	<section><h3>Overview</h3>
-		<dl class="fa">
-			<dt>A Python package is simply a group of Python module(s), usually stored in one directory</dt>
-			<dt>Packages are a way of structuring Python’s module namespace by using “dotted module names”.</dt>
-		</dl>
-	</section>
-	<section><h3>make directory a package: <code class="note">__init__.py</code></h3>
-		<dl class="fa">
-			<dt>You should put an <code class="note">__init__.py</code> file in the directory, which you want it to be treated as package from Python.</dt>
-			<dt><code class="note">__init__.py</code> can be an empty file</dt>
-			<dt>or you can put some initialization code for the package</dt>
-		</dl>
-	</section>
-	<section><h3>a package - example</h3>
-		<pre><code rel="Terminal" class="shell" data-noescape>
-			$ tree my_app
-			my_app/
-			├── app.py
-			└── packA
-					├── greet.py
-					├── __init__.py
-					└── packB
-							├── get_data.py
-							└── __init__.py
-		</code></pre>
-	</section>
-	<section><h3>The __pycahce__ folder</h3>
-		<dl class="fa">
-			<dt>To speed up loading modules, Python caches the compiled version of each module in the automatically created __pycache__ directory under the name module.version.pyc</dt>
-			<dt>If you really need to tell python not to generate the compiled versions, you can set the <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE">PYTHONDONTWRITEBYTECODE</a> env. var.</dt>
-		</dl>
-	</section>
-	<section><h3>pyc files</h3>
-		<dl class="fa">
-			<dt>Python automatically compiles a script to so called byte code, before running it.</dt>
-			<dt>When a module is imported for the first time, or when the source is more recent than the current compiled file, a .pyc file containing the compiled code will usually be created in the same directory as the .py file.</dt>
-			<dt>When you run the program next time, Python uses this file to skip the compilation step.</dt>
-		</dl>
-	</section>
-	<section><h3 class="advanced">decompile pyc files</h3>
-		<dl class="fa">
-				<dt><a href="https://github.com/rocky/python-uncompyle6">uncompyle6</a> works for Python 3 and 2.7 (more recent, aiming to unify earlier forks and focusing on automated testing).</dt>
-				<dd>Read more on <a href="https://stackoverflow.com/questions/5287253/is-it-possible-to-decompile-a-compiled-pyc-file-into-a-py-file#">stackoverflow</a></dd>
-		</dl>
-	</section>
-	<section><h3>Importing packages</h3>
-		<dl class="fa">
-			<dt>You can import a package using the same mechanism as importing a module. But do  not forget - a package makes its namespace, as well.</dt>
-		</dl>
-	</section>
-</section>
-
 
 <section><h1>Import-related module attributes</h1></section>
-<section><h2>Import-related module attributes</h2>
-	<section><h3>Overview</h3>
+<section><h2>Import-related module attributes/global variables</h2>
+	<section><h3>The <code>__file__</code> and <code>__name__</code> variables</h3>
 		<dl class="fa">
-			<dt>Python modules are objects and as such they have attributes.</dt>
-			<dt>Most useful module attributes are:</dt>
-			<dd>__name__</dd>
-			<dd>__file__</dd>
+			<dt>Within a python file we can use the global <code>__file__</code> and <code>__name__</code> variables.</dt>
+			<dt><code>__file__</code> variable contains the pathname of the file from which the module was loaded</dt>
+			<dt>When a Python module is imported, <code>__name__</code> is set to the module’s name, without the .py extension</dt>
+			<dt>When a Python module is executed as a standalone script, the <code>__name__</code> variable is set to '__main__' value</dt>
 		</dl>
+		<pre><code rel="helper_module.py" class="python">
+			print( "__file__:", __file__)
+			print( "__name__:", __name__)
+		</code></pre>
+		<dt>Executed as a standalone script:</dt>
+		<pre><code rel="Terminal" class="bash">
+			python helper_module.py
+
+			# __file__: /some/path/helper_module.py
+			# __name__: __main__
+		</code></pre>
+		<dt>Executed as a module:</dt>
+		<pre><code rel="app.py" class="python">
+			import helper_module
+
+			# __file__: /some/path/helper_module.py
+			# __name__: helper_module
+		</code></pre>
 	</section>
 	<section><h3><code>__name__</code></h3>
 		<dl class="fa">
@@ -297,6 +268,60 @@
 		<dl class="fa">
 			<dt>Run the <code>main.py</code> and look at the output</dt>
 			<dt>Run the <code>helper_module.py</code> and look at the output</dt>
+		</dl>
+	</section>
+</section>
+
+<section><h1>Packages in Python</h1></section>
+<section><h2>Packages in Python</h2>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>A Python package is simply a group of Python module(s), usually stored in one directory</dt>
+			<dt>Packages are a way of structuring Python’s module namespace by using “dotted module names”.</dt>
+		</dl>
+	</section>
+	<section><h3>make directory a package: <code class="note">__init__.py</code></h3>
+		<dl class="fa">
+			<dt>You should put an <code class="note">__init__.py</code> file in the directory, which you want it to be treated as package from Python.</dt>
+			<dt><code class="note">__init__.py</code> can be an empty file</dt>
+			<dt>or you can put some initialization code for the package</dt>
+		</dl>
+	</section>
+	<section><h3>a package - example</h3>
+		<pre><code rel="Terminal" class="shell" data-noescape>
+			$ tree my_app
+			my_app/
+			├── app.py
+			└── packA
+					├── greet.py
+					├── __init__.py
+					└── packB
+							├── get_data.py
+							└── __init__.py
+		</code></pre>
+	</section>
+	<section><h3>The __pycahce__ folder</h3>
+		<dl class="fa">
+			<dt>To speed up loading modules, Python caches the compiled version of each module in the automatically created __pycache__ directory under the name module.version.pyc</dt>
+			<dt>If you really need to tell python not to generate the compiled versions, you can set the <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE">PYTHONDONTWRITEBYTECODE</a> env. var.</dt>
+		</dl>
+	</section>
+	<section><h3 class="advanced">pyc files</h3>
+		<dl class="fa">
+			<dt>Python automatically compiles a script to so called byte code, before running it.</dt>
+			<dt>When a module is imported for the first time, or when the source is more recent than the current compiled file, a .pyc file containing the compiled code will usually be created in the same directory as the .py file.</dt>
+			<dt>When you run the program next time, Python uses this file to skip the compilation step.</dt>
+		</dl>
+	</section>
+	<!-- <section><h3 class="advanced">decompile pyc files</h3>
+		<dl class="fa">
+				<dt><a href="https://github.com/rocky/python-uncompyle6">uncompyle6</a> works for Python 3 and 2.7 (more recent, aiming to unify earlier forks and focusing on automated testing).</dt>
+				<dd>Read more on <a href="https://stackoverflow.com/questions/5287253/is-it-possible-to-decompile-a-compiled-pyc-file-into-a-py-file#">stackoverflow</a></dd>
+		</dl>
+	</section> -->
+	<section><h3>Importing packages</h3>
+		<dl class="fa">
+			<dt>You can import a package using the same mechanism as importing a module. But do  not forget - a package makes its namespace, as well.</dt>
 		</dl>
 	</section>
 </section>
