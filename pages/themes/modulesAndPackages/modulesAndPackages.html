@@ -286,8 +286,6 @@
 			<dt><code class="note">__init__.py</code> can be an empty file</dt>
 			<dt>or you can put some initialization code for the package</dt>
 		</dl>
-	</section>
-	<section><h3>a package - example</h3>
 		<pre><code rel="Terminal" class="shell" data-noescape>
 			$ tree my_app
 			my_app/
@@ -299,34 +297,63 @@
 							├── get_data.py
 							└── __init__.py
 		</code></pre>
+		<p class="advanced">from python 3.2 __init__.py must be present only in Regular Packages, but can be omitted in Namespace Packages. More info <a href="https://docs.python.org/3/reference/import.html#regular-packages">in docs</a></p>
 	</section>
-	<section><h3>The __pycahce__ folder</h3>
+	<section><h3>Importing packages</h3>
 		<dl class="fa">
-			<dt>To speed up loading modules, Python caches the compiled version of each module in the automatically created __pycache__ directory under the name module.version.pyc</dt>
+			<dt>You can import a module from a package using the same mechanism as importing a single module. But do  not forget - a package makes its namespace, so you must use the dot notation.</dt>
+			<dt>If we have next structure:</dt>
+			<pre><code rel="Terminal" class="shell" data-noescape>
+				$ tree my_app
+				my_app/
+				├── app.py
+				└── packA
+						├── greet.py
+						├── __init__.py
+						└── packB
+								├── get_data.py
+								└── __init__.py
+			</code></pre>
+			<dt>We can import <code>get_data</code> module in <code>app</code> with:</dt>
+			<pre><code rel="app.py" class="python">
+				import packA.packB.get_data
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3 class="advanced">pyc files and __pycahce__ folder</h3>
+		<dl class="fa">
+			<dt>Python automatically compiles a script to so called byte code, before running it.</dt>
+			<dt>To speed up loading modules, when a module is imported for the first time, or when the source is more recent than the current compiled file, a <code>.pyc</code> file containing the compiled code will be created.</dt>
+			<dt>When you run the program next time, Python uses this file to skip the compilation step.</dt>
+			<dt>Python caches the compiled version of each module in the automatically created __pycache__ directory under the name module.version.pyc</dt>
 			<dt>If you really need to tell python not to generate the compiled versions, you can set the <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE">PYTHONDONTWRITEBYTECODE</a> env. var.</dt>
 		</dl>
 	</section>
-	<section><h3 class="advanced">pyc files</h3>
-		<dl class="fa">
-			<dt>Python automatically compiles a script to so called byte code, before running it.</dt>
-			<dt>When a module is imported for the first time, or when the source is more recent than the current compiled file, a .pyc file containing the compiled code will usually be created in the same directory as the .py file.</dt>
-			<dt>When you run the program next time, Python uses this file to skip the compilation step.</dt>
-		</dl>
-	</section>
+
 	<!-- <section><h3 class="advanced">decompile pyc files</h3>
 		<dl class="fa">
 				<dt><a href="https://github.com/rocky/python-uncompyle6">uncompyle6</a> works for Python 3 and 2.7 (more recent, aiming to unify earlier forks and focusing on automated testing).</dt>
 				<dd>Read more on <a href="https://stackoverflow.com/questions/5287253/is-it-possible-to-decompile-a-compiled-pyc-file-into-a-py-file#">stackoverflow</a></dd>
 		</dl>
 	</section> -->
-	<section><h3>Importing packages</h3>
-		<dl class="fa">
-			<dt>You can import a package using the same mechanism as importing a module. But do  not forget - a package makes its namespace, as well.</dt>
-		</dl>
-	</section>
 </section>
 
 
+<section data-min="50"><h1>Execute python module from command line</h1></section>
+<section><h2>Execute python module from command line</h2>
+	<section>
+		<dl class="fa">
+			<dt>We can use <code>python -m <i>module_name</i> from terminal in order to execute a module</code></dt>
+			<pre><code rel="Terminal" class="bash">
+				python -m helper_module
+
+				# note the difference between:
+				python3 helper_module.py
+			</code></pre>
+			<dt>Note that since the argument is a module name, you must not give a file extension (.py).</dt>
+		</dl>
+	</section>
+</section>
 <!-- <section data-min="10"><h1>List dependencies of a project</h1></section>
 <section><h2>List dependencies of a project</h2>
 	<section><h3>pip way - requirements.txt</h3>

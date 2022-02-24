@@ -90,7 +90,7 @@
 		<dl class="fa">
 			<dt>Python has a strong community which releases lot's of modules(packages), which you can use for free and focus on "get job done", instead of reinventing the wheel.</dt>
 			<dt>pip is the tool for installing Python packages from <a href="https://pypi.python.org/pypi">PyPI (Python Package Index)</a></dt>
-			<dt class="note">Note, that by using pip, a package will be installed in your system's python distribution.</dt>
+			<dt class="note">Note, that if you do not use a Virtual Environment, a package installed by using pip will be installed in your system's python distribution.</dt>
 		</dl>
 	</section>
 	<section style="font-size: 1em"><h3>pip basic commands</h3>
@@ -119,8 +119,8 @@
 </section>
 
 
-<section><h1>Python Virtual Environments with Pipenv</h1></section>
-<section><h2>Python Virtual Environments with Pipenv</h2>
+<section><h1>Python Virtual Environments</h1></section>
+<section><h2>Python Virtual Environments</h2>
 	<section><h3>Virtual environment - Why?</h3>
 		<dl class="fa">
 			<dt>Python apps usually depends on many modules(packages), which depends on other packages, and very often - from a specific version of a package.</dt>
@@ -134,16 +134,61 @@
 			<dt>A virtual environment is an isolated Python environment that allows packages to be installed for use by a particular application, rather than being installed system wide</dt>
 			<dt>A virtual environment is a directory tree which contains Python interpreter, libraries and scripts installed into it,  and other files which indicate that it is a virtual environment.</dt>
 
-			<dt>There are many tools for working with virtual environments in Python (virtualenv, pyenv, venv, virtualenvwrapper, pipenv)</dt>
-			<dt>Starting with Python 3.4, <a href="https://docs.python.org/3/library/venv.html#module-venv"><code>venv</code></a> module is the preferred way to create and manage virtual environments. venv is included in the Python standard library and requires no additional installation.</dt>
+			<dt>There are many tools for working with virtual environments in Python (<a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>, <a href="https://pipenv.pypa.io/en/latest/">pipenv</a>, <a href="https://python-poetry.org/docs/master/managing-environments/">poetry</a>, <a href="https://docs.conda.io/en/latest/">conda</a>, etc.)</dt>
+			<dt>Starting with Python 3.4, <a href="https://docs.python.org/3/library/venv.html#module-venv"><code>venv</code></a> module is the preferred way to create and manage virtual environments.</dt>
+			<dt>venv module is included in the Python standard library and requires no additional installation.</dt>
 		</dl>
 	</section>
-	<section><h3></h3>
+	<section><h3>Working with Virtual Environment</h3>
+		<pre><code rel="Terminal" class="bash">
+			# make sure you are in project folder, where you want to use virtual environment
+
+			# create virtual environment with name ".venv"
+			python3 -m venv .venv
+
+			# a folder '.venv' is created in the project folder
+		</code></pre>
+		<dl class="fa">
+			<dt><code>.venv</code> is a common directory location for a virtual environment as it keeps the directory typically hidden in your shell.</dt>
+			<dt>In order to install and use python packages in your virtiual env, you <span class="note">must activate it</span>: </dt>
+			<pre><code rel="Terminal" class="bash">
+				# On Windows, run:
+				.venv\Scripts\activate.bat
+
+				# On Unix or MacOS, run:
+				source .venv/bin/activate
+			</code></pre>
+			<dt>You can confirm you’re in the virtual environment by checking the location of your Python interpreter:</dt>
+			<pre><code rel="Terminal" class="bash">
+				# On Windows, run:
+				where python
+
+				# On Unix or MacOS, run:
+				which python
+
+				# It should be in the .venv directory
+			</code></pre>
+			<dt>If you want to switch projects or otherwise leave your virtual environment, simply run</dt>
+			<pre><code rel="Terminal" class="bash">
+				deactivate
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3>References</h3>
+		<dl class="fa">
+			<dt><a href="https://docs.python.org/3/tutorial/venv.html">Virtual Environments and Packages</a> @python3 tutorial</dt>
+		</dl>
+	</section>
+</section>
+
+
+<section data-min="50"><h1>Installing packages using pip and virtual environments</h1></section>
+<section><h2>Installing packages using pip and virtual environments</h2>
+	<section><h3>Live Demo</h3>
 		<dl class="fa">
 			<dt>Live Demo on <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment">Installing packages using pip and virtual environments</a></dt>
 		</dl>
 	</section>
-
 </section>
 
 
