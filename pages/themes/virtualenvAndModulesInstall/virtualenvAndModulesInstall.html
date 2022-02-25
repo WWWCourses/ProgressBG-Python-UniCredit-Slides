@@ -141,7 +141,7 @@
 			<dt>venv module is included in the Python standard library and requires no additional installation.</dt>
 		</dl>
 	</section>
-	<section id="activateVenv"><h3>Create Virtual Environment</h3>
+	<section id="createVenv"><h3>Create Virtual Environment</h3>
 		<pre><code rel="Create Virtual Environment - Terminal" class="bash">
 			# make sure you are in project folder, where you want to use virtual environment
 
@@ -155,13 +155,12 @@
 			<dt>Note, that you need to create a virtiual environment per project only once. But each time you work in your project you must activate it.</dt>
 		</dl>
 	</section>
-	<section>
+	<section id="activateVenv">
 		<dl class="fa">
 			<dt>In order to install and use python packages in your virtiual env, you <span class="note">must activate it</span>: </dt>
 			<pre><code rel="Activate Virtual Environment - Terminal" class="bash">
 				# On Windows PowerShell run:
 				.venv\Scripts\Activate.ps1
-
 
 				# On Windows CommandPrompt run:
 				.venv\Scripts\activate.bat
