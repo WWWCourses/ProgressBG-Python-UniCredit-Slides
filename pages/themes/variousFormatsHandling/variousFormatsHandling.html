@@ -85,7 +85,8 @@
 		<dl class="fa">
 			<dt>The native data serialization module for Python is called Pickle.</dt>
 			<dt>It supports <span class="note">"Pickling"</span> - when a Python object hierarchy is converted into a byte stream, and <span class="note">"Unpickling"</span> - the inverse operation, when a byte stream is converted back into an object hierarchy</dt>
-			<dt><a href="https://docs.python.org/3/library/pickle.html"> pickle — Python object serialization</a></dt>
+			<dt>Reference: <a href="https://docs.python.org/3/library/pickle.html"> pickle - Python object serialization</a></dt>
+			<dt class="note">For storing data in databases and archival storage, you’re probably better off using a more standard data encoding, such as JSON, XML, CSV, which are discussed later in the slides.</dt>
 		</dl>
 	</section>
 	<section><h3>Example</h3>
@@ -104,11 +105,6 @@
 			print(received_prices)
 		</code></pre>
 	</section>
-	<section><h3>Notes</h3>
-		<dl class="fa">
-			<dt>For storing data in databases and archival storage, you’re probably better off using a more standard data encoding, such as JSON, XML, CSV</dt>
-		</dl>
-	</section>
 </section>
 
 
@@ -119,7 +115,7 @@
 			<dt><abbr>JSON</abbr><dfn id="CSV"><span>Java</span><span>Script</span><span>Object</span><span>Notation</span></dfn></dt>
 		</dl>
 		<div>
-			<blockquote cite="href="https://en.wikipedia.org/wiki/JSON"">JSON is an open-standard file format that uses human-readable text to transmit data objects consisting of <span class="note">attribute–value pairs and array data</span> types (or any other serializable value)</blockquote><a href="https://en.wikipedia.org/wiki/JSON">JSON @wikipedia</a>
+			<blockquote cite="href="https://en.wikipedia.org/wiki/JSON"">JSON is an open-standard file format that uses human-readable text to transmit data objects consisting of <span class="note">attribute-value pairs and array data</span> types (or any other serializable value)</blockquote><a href="https://en.wikipedia.org/wiki/JSON">JSON @wikipedia</a>
 		</div>
 	</section>
 	<section><h3>Overview - Examples</h3>
@@ -195,8 +191,10 @@
 			<dt>Deserialize а readable (text or binary) file-like object containing a JSON document to a Python object using next <a href="https://docs.python.org/3/library/json.html#json-to-py-table">conversion table</a>.</dt>
 		</dl>
 	</section>
-	<section><h3><code>json.load()</code> sample file</h3>
-		<pre><code rel="sample.json" class="javascript" data-noescape>
+	<section><h3><code>json.load()</code> example</h3>
+		<dl class="fa" style="min-width: 70vw;">
+			<dt>Let's have next sample json file:</dt>
+			<pre><code rel="sample.json" class="javascript" data-noescape>
 				[
 					{
 							"name": "apple",
@@ -211,25 +209,27 @@
 							"price": 1.60
 					}
 				]
-		</code></pre>
+			</code></pre>
+			<dt>We can read the data into a Python data structure with:</dt>
+			<pre><code rel="Python" class="python">
+				import json
+				from operator import itemgetter
+
+				json_file = "sample.json"
+
+				#read json from file
+				with open(json_file) as f:
+						json_data = json.load(f)
+
+				# use the data, stored in json_data:
+				for i in sorted(json_data,key=itemgetter("price")):
+					print(i)
+			</code></pre>
+		</dl>
+
 	</section>
-	<section><h3><code>json.load()</code> example</h3>
-		<pre><code rel="Python" class="python">
-			import json
-			from operator import itemgetter
 
-			json_file = "sample.json"
-
-			#read json from file
-			with open(json_file) as f:
-					json_data = json.load(f)
-
-			for i in sorted(json_data,key=itemgetter("price")):
-				print(i)
-		</code></pre>
-	</section>
-
-	<section><h3>Convert Python objects to JSON</h3>
+	<section><h3>Convert Python objects into JSON string</h3>
 		<dl class="fa">
 			<dt><code><a href="https://docs.python.org/3/library/json.html#json.dump">json.dump()</a></code></dt>
 			<dd>Serialize an object as a JSON formatted stream to a .write()-supporting file-like object using next <a href="https://docs.python.org/3/library/json.html#json-to-py-table">conversion table</a>.</dd>
