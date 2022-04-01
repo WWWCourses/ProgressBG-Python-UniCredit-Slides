@@ -12,11 +12,14 @@ async def compute(future):
 
 async def answer():
   print('calculating')
-  await asyncio.sleep(2)
+  await asyncio.sleep(5)
+  print('calc end')
   return 42
 
 f = asyncio.Future()
+
 loop = asyncio.get_event_loop()
 loop.run_until_complete(compute(f))
+
 loop.close()
-f.result()
+print(f.result())

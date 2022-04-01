@@ -1,8 +1,9 @@
 import asyncio
+from types import coroutine
 
 async def couroutineA():
   # simulate i/o operation using sleep
-  await asyncio.sleep(5)
+  await asyncio.sleep(3)
   print("Welcome")
 
 
@@ -14,8 +15,8 @@ async def couroutineB():
 
 
 loop = asyncio.get_event_loop()
-couroutineA_worker = couroutineA()
-couroutineB_worker = couroutineB()
+worker1 = couroutineA()
+worker2 = couroutineB()
 
-loop.run_until_complete(asyncio.gather(couroutineA_worker, couroutineB_worker))
+loop.run_until_complete(asyncio.gather(worker1, worker2))
 loop.close()
