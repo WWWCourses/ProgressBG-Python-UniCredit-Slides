@@ -84,7 +84,7 @@
 			<dt class="note">Asynchronous Execution</dt>
 			<dd>A call to asynchronous function allows to continue to execute next command instead of waiting for a response.Once the called function returns a response, the program goes back to that function call and processes the response. </dd>
 			<dt class="note">Parallel Execution</dt>
-			<dd>Processing can be done simultaneously via multiple threats, handled by the different CPU's threats.</dd>
+			<dd>Processing can be done simultaneously via multiple threads/processes, handled by the different CPU's threads/cores.</dd>
 		</dl>
 	</section>
 </section>
@@ -99,12 +99,12 @@
 	<section><h3>Subroutines vs Coroutines</h3>
 		<dl class="fa">
 			<dt><span class="note">Subroutine</span>: An instance of a subroutine have single entry point and only returns once. A subroutine <span class="note">does not hold state between invocations</span></dt>
-			<dt><span class="note">Coroutine</span>: can exit by calling other coroutines, which may later return to the point where they were invoked in the original coroutine. <span class="note">A coroutine instance holds state</span></dt>
+			<dt><span class="note">Coroutine (Asynchronous routine)</span>: can exit by calling other coroutines, which may later return to the point where they were invoked in the original coroutine. <span class="note">A coroutine instance holds state</span></dt>
+			<dt>I.e. a co-routine is able to “pause” while waiting on its ultimate result and let other co-routines run in the meantime.</dt>
 			<dt class="note">Synchronous and Asynchronous functions/callables are different types - you can't just mix and match them</dt>
 		</dl>
 	</section>
 </section>
-
 
 <section data-min="30"><h1>Basics of Python asyncio library</h1></section>
 <section><h2>Basics of Python asyncio library</h2>
@@ -278,36 +278,43 @@
 	</section>
 </section>
 
-<section><h3>A pure async http request</h3>
-	<dl class="fa">
-		<dt>You can not use the standard <code>request</code> library, as it is synchronous.</dt>
-		<dd class="advanced">You can, if you executed in different thread, by BaseEventLoop.run_in_executor()</dd>
-		<dt>The module <a href="https://aiohttp.readthedocs.io/en/stable/">aiohttp</a> provides asynchronous functionality for such cases</dt>
-	</dl>
-	<pre><code rel="Python" class="python">
-		import asyncio
-		import aiohttp
+<section data-min="10"><h1>Examples</h1></section>
+<section><h2>Examples</h2>
+	<section><h3>A pure async http request</h3>
+		<dl class="fa">
+			<dt>You can not use the standard <code>request</code> library, as it is synchronous.</dt>
+			<dd class="advanced">You can, if you executed in different thread, by BaseEventLoop.run_in_executor()</dd>
+			<dt>The module <a href="https://aiohttp.readthedocs.io/en/stable/">aiohttp</a> provides asynchronous functionality for such cases</dt>
+			<pre><code rel="Python" class="python" style="min-height: 50vh;">
+				import asyncio
+				import aiohttp
 
-		async def do_request():
-			async with aiohttp.request('GET', 'https://google.com') as response:
-				html = await response.read()
-				print(html)
+				async def do_request():
+					async with aiohttp.request('GET', 'https://progressbg.net/') as response:
+						html = await response.read()
+						print(html.decode())
 
 
-		# init event loop:
-		loop = asyncio.get_event_loop()
+				# init event loop:
+				loop = asyncio.get_event_loop()
 
-		# run tasks in event loop:
-		loop.run_until_complete(do_request())
-	</code></pre>
+				# run tasks in event loop:
+				loop.run_until_complete(do_request())
+			</code></pre>
+		</dl>
+	</section>
 </section>
+
 
 <section data-min="5"><h1>Resources</h1></section>
 <section><h2>Resources</h2>
-	<section>
+	<section><h3>Readings</h3>
 		<dl class="fa">
 			<dt><a href="https://realpython.com/async-io-python/">Async IO in Python: A Complete Walkthrough</a></dt>
 		</dl>
+	</section>
+	<section><h3>Video: Demystifying Python's Async and Await Keywords</h3>
+		<iframe width="1280" height="720" src="https://www.youtube.com/embed/F19R_M4Nay4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</section>
 </section>
 
