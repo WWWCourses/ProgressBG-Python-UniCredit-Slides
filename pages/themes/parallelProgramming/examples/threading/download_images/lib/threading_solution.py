@@ -22,18 +22,17 @@ def make_filename(url:str)->str:
 	if match:
 		return match.group(1) + '.jpg'
 
+def download_one(url, output_dir):
+	print(f'Downloading {url}')
+	img_bytes = download_image(url)
+	filename = make_filename(url)
+	write_to_file(output_dir + filename, img_bytes)
+
 def download_all(urls:List[str], output_dir:str)->None:
 	for url in urls:
-		print(f'Downloading {url}')
-		img_bytes = download_image(url)
-		filename = make_filename(url)
-		write_to_file(output_dir + filename, img_bytes)
+		thread = threading.Thread(target=download_one, args=(url, output_dir))
+		thread.start()
+		thread.join()
 
-# create the tread
-tr = threading.Thread(target=worker, args=(42,))
 
-# start the thread:
-tr.start()
 
-# wait until thread terminates:
-tr.join()
