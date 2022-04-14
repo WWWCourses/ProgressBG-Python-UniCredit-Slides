@@ -129,7 +129,8 @@
 				async def couroutineA():
 					await coroutineB()
 			</code></pre>
-			<dt class="note">A coroutine object may be created but isn't run until an event loop is running.</dt>
+			<dt>A coroutine object may be created but isn't run until an event loop is running.</dt>
+			<dt>We can use <code>await</code> only on coroutines (i.e. functions defined with <code>async</code>).</dt>
 		</dl>
 	</section>
 	<section><h3>The <a href="https://docs.python.org/3/library/asyncio-eventloop.html">EventLoop</a></h3>
@@ -142,6 +143,29 @@
 			<dd>Launching subprocesses and the associated transports for communication with an external program.</dd>
 			<dd>Delegating costly function calls to a pool of threads.</dd>
 		</dl>
+	</section>
+	<section><h3>Event-Loop Example</h3>
+		<pre><code rel="Python" class="python">
+			import asyncio
+
+			async def async_func(task_no):
+				print(f'{task_no} is started ...')
+				await asyncio.sleep(1)
+				print(f'{task_no} ends!')
+
+			async def main():
+				taskA = loop.create_task (async_func('taskA'))
+				taskB = loop.create_task(async_func('taskB'))
+				taskC = loop.create_task(async_func('taskC'))
+				await asyncio.wait([taskA,taskB,taskC])
+
+			if __name__ == "__main__":
+				try:
+					loop = asyncio.get_event_loop()
+					loop.run_until_complete(main())
+				except :
+					pass
+		</code></pre>
 	</section>
 	<!-- <section><h3>simple example</h3></section> -->
 </section>
@@ -304,7 +328,6 @@
 		</dl>
 	</section>
 </section>
-
 
 <section data-min="5"><h1>Resources</h1></section>
 <section><h2>Resources</h2>
