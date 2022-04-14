@@ -6,13 +6,12 @@ from typing import List
 
 
 def download_image(url:str)->None:
-	print(f'Donwloading {url}')
+	print(f'Downloading {url}')
 	response = requests.get(url)
 	if response.ok:
 		return response.content
 
 def write_to_file(filename:str, bytes:bytes):
-	print(f'writing to {filename}')
 	with open(filename, 'wb') as fh:
 		fh.write(bytes)
 
@@ -23,7 +22,6 @@ def make_filename(url:str)->str:
 		return match.group(1) + '.jpg'
 
 def download_one(url, output_dir):
-	print(f'Downloading {url}')
 	img_bytes = download_image(url)
 	filename = make_filename(url)
 	write_to_file(output_dir + filename, img_bytes)
