@@ -170,60 +170,124 @@
 	<p>Next sections demonstrate the usage of various Python's Data Science related packages. You can install them separatelly, as given in the slides, or you can skip the installations, and use the <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a> Python's distribution</a>, bundled with data science and machine learning related applications</p>
 </section>
 
-<section><h1>iPython and Jupiter Notebook</h1></section>
-<section><h2>iPython and Jupiter Notebook</h2>
+
+<section data-min="20"><h1>JupyterLab - the next-generation web-based user interface for Project Jupyter</h1></section>
+<section><h2>JupyterLab - the next-generation web-based user interface for Project Jupyter</h2>
 	<section><h3>Overview</h3>
+	<dl class="fa">
+		<dt>JupyterLab is the next-generation <span class="note">user interface</span> for Project Jupyter</dt>
+		<dt>It's a brand new implementation of the classic Jupyter Notebook, using the new Front-End technologies which allows for adding new features and extensions</dt>
+		<dt>The notebook document format used in JupyterLab is the same as in the classic Jupyter Notebook</dt>
+	</dl>
+	</section>
+	<section><h3>Overview</h3>
+	<dl class="fa">
+		<dt>JupyterLab offers an IDE-like experience to users</dt>
+		<dt>It puts together most of the instruments a data scientist need: code/text editors, terminals, image viewer, python console.</dt>
+		<dd>And they work in a synchronised way.</dd>
+		<dt>JupyterLab allows third-party sides to write extensions (<span class="note">npm packages</span>) for it through the JupyterLab public APIs</dt>
+	</dl>
+	</section>
+	<section><h3>Install JupyterLab</h3>
+	<dl class="fa">
+		<dt class="note">Conda</dt>
+		<dd><code>conda install -c conda-forge jupyterlab</code></dd>
+		<dt class="note">Pip</dt>
+		<dd><code>pip install jupyterlab</code></dd>
+		<dd>If installing using per user (--user), you must add the user-level bin directory to your PATH environment variable in order to launch jupyter lab</dd>
+		<dt class="note">Pipenv</dt>
+		<dd><code>pipenv install jupyterlab</code></dd>
+		<dd>In order to launch jupyter lab, you must activate the project’s virtualenv.</dd>
+		<dt>Reference: <a href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html">JupyterLab>Installation</a></dt>
+	</dl>
+	</section>
+</section>
+<section><h2>Basic operations</h2>
+	<section><h3>Start the server</h3>
 		<dl class="fa">
-			<dt>A client-server application, which allows you to edit and run your notebooks via a web browser</dt>
-			<dt>A <em>notebook</em> is an application which consists of code and text</dt>
-			<dt>In the end of 2014, <a href="http://jupyter.org/">Project Jupyter</a> started as a spin-off project from <a href="https://ipython.org/">IPython</a></dt>
-			<dt>Now, IPython is the name of the Python's Jupyter backend (kernel)</dt>
-			<dt class="note">Live Demo:</dt>
-			<dd><a href="examples/jupyter_demos/Parsing JSON with pandas.ipynb">Parsing JSON with pandas.ipynb</a></dd>
-			<dd><a href="https://drive.google.com/file/d/138sRdZKKiUIPK-6Xw6ai7gosTKvghUQy/view?usp=sharing">Parsing JSON with pandas @Google Colaboratory</a></dd>
+			<dt>Make sure you are in the folder, containing your project files</dt>
+			<dt>Activate the virtual environment</dt>
+		</dl>
+		<pre><code rel="Terminal" class="bash" data-noescape>
+			cd /your/project/folder
+
+			# activate the virtual environment:
+			pipenv shell
+
+			# start the Jupyter server:
+			jupyter notebook
+
+			# in case of problems: start the Jupyter server with a clean config:
+			jupyter notebook --generate-config
+		</code></pre>
+		<dl class="fa">
+			<dt>Jupyter Notebook will be opened automatically in your browser</dt>
 		</dl>
 	</section>
-	<section><h3>iPython</h3>
+	<section><h3>Stop the server</h3>
 		<dl class="fa">
-			<dt>IPython - an enhanced Interactive Python, which provides:</dt>
-			<dd>A powerful interactive shell</dd>
-			<dd>Flexible, embeddable interpreters to load into your own projects</dd>
-			<dd>Support for interactive data visualization and use of GUI toolkits.</dd>
-			<dd>Easy to use, high performance tools for parallel computing.</dd>
-			<dd class="note">A kernel for Jupyter.</dd>
-		</dl>
-	</section>
-	<section><h3>iPython install</h3>
-		<pre><code rel="Terminal" class="shell" data-noescape>
-			#install iPython with pip3
-			$ pip3 install ipython
-
-			#install iPython on pipenv
-			$ pipenv install ipython
-		</code></pre>
-	</section>
-	<section><h3>Jupyter Notebook - install</h3>
-		<pre><code rel="Terminal" class="shell" data-noescape>
-			#install jupyter with pip3
-			$ pip3 install jupyter
-
-			#install jupyter on pipenv
-			$ pipenv install jupyter
-		</code></pre>
-	</section>
-	<section><h3>Create a simple Jupyter Notebook</h3>
-		<dl class="fa">
-			<dt>Start the server:</dt>
-			<pre style="width: 100%"><code rel="Terminal" class="bash">
-				# navigate to the folder you want to be served:
-				cd jupyter_demos
-				# start the server:
-				jupyter notebook
+			<dt>Press <kbd>CTRL+C</kbd> on the Terminal running jupyterlab</dt>
+			<pre><code rel="Terminal" class="bash" data-noescape>
+				Shutdown this notebook server (y/[n])? y
 			</code></pre>
-			<dt>Now you can create from the browser your notebooks</dt>
+			<dt>Or if you're lazy to type 'y', then double press <kbd>CTL+C</kbd> </dt>
+			<dt>Or just exit that Terminal</dt>
+		</dl>
+	</section>
+	<section><h3 class="advanced">Managing Workspaces</h3>
+		<dl class="fa">
+			<dt>JupyterLab sessions always reside in a workspace</dt>
+			<dt>Workspaces contain the state of JupyterLab: the files that are currently open, the layout of the application areas and tabs, etc</dt>
+			<dt>The default workspace does not have a name and resides at the primary /lab URL</dt>
+			<dd><code>http(s)://&lt;server:port&gt;/&lt;lab-location&gt;/lab</code></dd>
+			<dt>All other workspaces have a name that is part of the URL:</dt>
+			<dd><code>http(s)://&lt;server:port&gt;/&lt;lab-location&gt;/lab/workspaces/foo</code></dd>
+			<dt>More on JupyterLab URLs and Workspaces: <a href="https://jupyterlab.readthedocs.io/en/stable/user/urls.html">JupyterLab URLs</a></dt>
+		</dl>
+	</section>
+	<section><h3>Working with Notebooks</h3>
+		<dl class="fa">
+			<dt>Live Demo</dt>
+			<dt>reference: <a href="https://jupyterlab.readthedocs.io/en/stable/user/notebook.html">Notebooks>Notebooks</a></dt>
 		</dl>
 	</section>
 </section>
+<section><h2>Upload your Jupyter Notebook to GitHub</h2>
+	<section>
+		<dl class="fa">
+			<dt>There is nothing different than pushing any other file to your github account:</dt>
+			<dd><span class="note">Add</span> your changes to the stage</dd>
+			<dd><span class="note">Commit</span> those changes</dd>
+			<dd><span class="note">Push</span> the branch to your GitHub repo</dd>
+			<pre><code rel="Terminal" class="bash" data-noescape>
+				# add your changes to the stage:
+				$ git add -A
+				# commit those changes:
+				$ git commit -m'__Describe your changes here__'
+				# push the branch (assuming "master" below)to your GitHub repo:
+				$ git push origin master
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3>Share/Render your JupyterNotebooks (GitHub Render)</h3>
+		<dl class="fa">
+			<dt>You can use <a href="https://github.com">github.com</a> to host your .ipynb files for free</dt>
+			<dt>GitHub can render .ipynb files. For more details check <a href="https://help.github.com/articles/working-with-jupyter-notebook-files-on-github/">github docs</a></dt>
+			<dd>when you click on it (the <code>.ipynb</code> extension) github will try to render the notebook in your browse</dd>
+			<dd>You can copy that URL and share it with anybody</dd>
+			<dd>Like that: <a href="https://github.com/ProgressBG-Python-Course/JupyterNotebooksExamples/blob/master/Notebooks/JupyterNotebook_basics.ipynb">JupyterNotebook_basics</a></dd>
+		</dl>
+	</section>
+	<section><h3>Share/Render your JupyterNotebooks (nbviewer)</h3>
+		<p class="note">The preferred way</p>
+		<dl class="fa">
+			<dt><a href="https://nbviewer.jupyter.org/">nbviewer.jupyter.org</a> is a Web Service to render .ipynb files</dt>
+			<dt>You can render there your .ipynb files, hosted on github, or GoogleDrive, Dropbox, ...</dt>
+			<dt>Like that: <a href="https://nbviewer.org/github/ProgressBG-Python-Course/JupyterNotebooksExamples/blob/master/Notebooks/JupyterNotebook_basics.ipynb">JupyterNotebook_introduction</a></dt>
+		</dl>
+	</section>
+</section>
+
 
 <section><h1>numpy</h1></section>
 <section><h2>numpy</h2>
@@ -277,8 +341,8 @@
 	</section>
 	<section><h3>Install</h3>
 		<pre><code rel="Terminal" class="shell" data-noescape>
-			#install pandas with pip3
-			$ pip3 install pandas
+			#install pandas with pip
+			$ pip install pandas
 
 			#install pandas on pipenv
 			$ pipenv install pandas
@@ -588,7 +652,7 @@
 	</dl>
 </section>
 
-<section><h1>DataFrames Merge (aka SQL Join)</h1></section>
+<section><h1 class="advanced">DataFrames Merge (aka SQL Join)</h1></section>
 <section><h2>DataFrames Merge</h2>
 	<section><h3>Overview</h3>
 		<dl class="fa">
