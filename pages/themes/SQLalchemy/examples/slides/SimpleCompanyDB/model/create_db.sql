@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS SimpleCompanyDB DEFAULT CHARACTER set utf8 default collate utf8_bin;
-USE SimpleCompanyDB;
+USE SimpleCompanyDB
 
 
 -- drop all tables

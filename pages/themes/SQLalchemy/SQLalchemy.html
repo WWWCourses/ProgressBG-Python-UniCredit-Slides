@@ -75,6 +75,78 @@
 </section>
 
 
+<section data-min="5"><h1>MySQL and Python</h1></section>
+<section><h2>MySQL and Python</h2>
+	<section><h3>Python DB-API</h3>
+		<dl class="fa">
+			<dt><a href="https://www.python.org/dev/peps/pep-0249/">Python Database API</a> is a set of standards recommended by a Special Interest Group for database module standardization</dt>
+			<dt>Standard Python distribution has in-built support for SQLite database connectivity by the sqlite3 module</dt>
+			<dt>Other RDBMS products (Oracle, PostgreSQL, MySQL,...) also have DB-API compliant drivers</dt>
+			<dd>A database driver is a software that allows an application (like Python program) to connect and interact with a database system</dd>
+		</dl>
+	</section>
+	<section><h3>MySQL Connector/Python</h3>
+		<dl class="fa">
+			<dt>Reference: <a href="https://dev.mysql.com/doc/connector-python/en/">MySQL Connector/Python Developer Guide</a></dt>
+			<dd>Note, that MySQL’s official documentation uses the term connector instead of driver.</dd>
+			<dt>Instalation:</dt>
+		</dl>
+		<pre><code rel="Terminal" class="bash">
+			# make sure you're in the venv
+			pip install mysql-connector-python
+		</code></pre>
+	</section>
+	<section><h3>MySQL Connector - Create connection</h3>
+		<pre><code rel="Python" class="python" style="min-height: 80vh;">
+			import mysql.connector
+			from mysql.connector import connection
+
+			def make_connection(user, password, db, host="localhost", port=3306):
+				try:
+					cnx = mysql.connector.connect(
+						user=user,
+						password=password,
+						db=db,
+						host=host,
+						port=port
+					)
+
+				except mysql.connector.Error as e:
+					print(e)
+
+				print('Connection Established')
+				return cnx
+
+
+			# Connect to server
+			cnx = make_connection (user="root", password="1234", db='customers')
+
+			# Get a cursor
+			cur = cnx.cursor()
+
+			# Execute a query
+			cur.execute("SELECT CURDATE()")
+
+			# Fetch one result
+			row = cur.fetchone()
+			print("Current date is: {0}".format(row[0]))
+
+			# fetch Multiple results
+			with cnx.cursor() as cursor:
+				cursor.execute(f'SHOW TABLES')
+
+				results = cursor.fetchall()
+				# print(results)
+				for r in results:
+					print(r)
+
+			# Close connection
+			cnx.close()
+		</code></pre>
+	</section>
+</section>
+
+
 <section><h1>What is an ORM?</h1></section>
 <section><h2>What is an ORM?</h2>
 	<section><h3>Overview</h3>
@@ -108,9 +180,10 @@
 	<section><h3>SimpleCompanyDB - the Model</h3>
 		<dl class="fa">
 			<dt>In next slides, in order to illustrate SQLAlchemy, I'll use a very simple model: SimpleCompanyDB</dt>
-			<dt>You can download the MySQL dump: <a href="examples/slides/real/SimpleCompanyDB/model/SimpleCompanyDB_dump.sql">SimpleCompanyDB_dump</a></dt>
+			<a href="./examples/slides/SimpleCompanyDB/model/model.png"><img src="./examples/slides/SimpleCompanyDB/model/model.png" style="min-height: 50vh;"></a>
+			<dt>You can download the MySQL dump: <a href="examples/slides/SimpleCompanyDB/model/SimpleCompanyDB_dump.sql">SimpleCompanyDB_dump</a></dt>
 		</dl>
-		<a href="examples/slides/real/SimpleCompanyDB/model/model.png"><img src="examples/slides/real/SimpleCompanyDB/model/model.png"></a>
+
 	</section>
 	<section><h3>SimpleCompanyDB - the data</h3>
 		<dl class="fa">
@@ -124,8 +197,7 @@
 			|--------------+----------------|
 			|            1 | Google         |
 			|            2 | Facebook       |
-			|            4 | Microsoft      |
-			|            5 | Microsoft      |
+			|            3 | Microsoft      |
 			+--------------+----------------+
 			4 rows in set
 			Time: 0.002s
@@ -155,8 +227,8 @@
 		<dl class="fa">
 			<dt>SQLAlchemy is the Python SQL Toolkit and ORM</dt>
 			<dd>Official site <a href="https://www.sqlalchemy.org/">www.sqlalchemy.org</a></dd>
-		</dl>
-		<br><a href="images/SQLAlchemy_layers.png"><img src="images/SQLAlchemy_layers.png"></a>
+		</dl><br>
+		<a href="images/SQLAlchemy_layers.png"><img src="images/SQLAlchemy_layers.png"></a>
 	</section>
 	<section><h3>Overview</h3>
 		<p>The SQLAlchemy flow:</p>
@@ -236,14 +308,6 @@
 			    person = relationship(Person)
 		</code></pre>
 	</section>
-	<section><h3>The Table object</h3>
-		<dl class="fa">
-			<dt>A table in a database is represented by an object of class Table</dt>
-		</dl>
-	</section>
-	<section><h3>Create a table into SimpleCompanyDB</h3>
-
-	</section>
 	<section><h3>SQLAlchemy Relationships</h3>
 		<dl class="fa">
 			<dt>SQLAlchemy supports four types of relationships: One To Many, Many To One, One To One, and Many To Many</dt>
@@ -285,7 +349,7 @@
 		</dl>
 	</section> -->
 	<section><h3>SQLAlchemy Sessions</h3>
-		<dl class="fa">Table
+		<dl class="fa">
 			<dt>Sessions are used to guarantee the database consistency.</dt>
 			<dt>All modifications tracked by Sessions (Units of Works) will be applied to the underlying database together, or none of them will.</dt>
 			<dt>More on Sessions: <a href="http://docs.sqlalchemy.org/en/rel_1_1/orm/session_basics.html">Session Basics @docs.sqlalchemy.org</a></dt>
@@ -300,6 +364,26 @@
 			<dt>If a table already exists, SQLAlchemy can read its column definitions directly from the database.</dt>
 			<dt>This processes is called <span class="note">reflecting the table</span>.</dt>
 		</dl>
+	</section>
+	<section><h3>example</h3>
+		<pre><code rel="Python" class="bash">
+			from sqlalchemy import create_engine
+			from sqlalchemy import MetaData
+			from sqlalchemy import Table, sql
+
+
+			# connect to Mysql/MariaDB:
+			engine = create_engine("mysql+pymysql://root:1234@localhost/SimpleCompanyDB")
+
+
+			# Create a MetaData instance
+			metadata = MetaData()
+			print(metadata.tables)
+
+			# reflect db schema to MetaData
+			metadata.reflect(bind=engine)
+			print(metadata.tables)
+		</code></pre>
 	</section>
 </section>
 
