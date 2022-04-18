@@ -75,11 +75,6 @@
 </section>
 
 
-<!-- <section><h1>The data science process</h1></section>
-<section><h2>The data science process</h2>
-	<section><h3>___MainSectionSubTitle___</h3></section>
-</section> -->
-
 <section><h1>Frame the concepts: Big data, Machine Learning, NLP, No SQL, Graph Database, Data Visualization</h1></section>
 <section><h2>Frame the concepts: Big data, Machine Learning, No SQL, Graph Database, NLP, Data Visualization</h2>
 	<section><h3 class="note">Big Data</h3>
@@ -206,21 +201,21 @@
 	<section><h3>Start the server</h3>
 		<dl class="fa">
 			<dt>Make sure you are in the folder, containing your project files</dt>
-			<dt>Activate the virtual environment</dt>
-		</dl>
-		<pre><code rel="Terminal" class="bash" data-noescape>
-			cd /your/project/folder
+			<dt>Activate the virtual environment and write:</dt>
+			<pre><code rel="Terminal" class="bash" data-noescape>
+				### start the server with Jupyter Lab front-end:
+				jupyter lab
 
-			# activate the virtual environment:
-			pipenv shell
+				### or
+				# start the server with Jupyter Notebook front-end:
+				jupyter notebook
 
-			# start the Jupyter server:
-			jupyter notebook
+				### in case of problems: generate new config file:
+				jupyter lab --generate-config
 
-			# in case of problems: start the Jupyter server with a clean config:
-			jupyter notebook --generate-config
-		</code></pre>
-		<dl class="fa">
+				# now start the server:
+				jupyter lab
+			</code></pre>
 			<dt>Jupyter Notebook will be opened automatically in your browser</dt>
 		</dl>
 	</section>
@@ -231,7 +226,7 @@
 				Shutdown this notebook server (y/[n])? y
 			</code></pre>
 			<dt>Or if you're lazy to type 'y', then double press <kbd>CTL+C</kbd> </dt>
-			<dt>Or just exit that Terminal</dt>
+			<dt>Or just close the Terminal</dt>
 		</dl>
 	</section>
 	<section><h3 class="advanced">Managing Workspaces</h3>
@@ -247,7 +242,8 @@
 	</section>
 	<section><h3>Working with Notebooks</h3>
 		<dl class="fa">
-			<dt>Live Demo</dt>
+			<dt><a href="https://nbviewer.org/github/ProgressBG-Python-Course/JupyterNotebooksExamples/blob/master/Notebooks/JupyterNotebook_basics.ipynb">Jupyter Notebook Basics</a></dt>
+
 			<dt>reference: <a href="https://jupyterlab.readthedocs.io/en/stable/user/notebook.html">Notebooks>Notebooks</a></dt>
 		</dl>
 	</section>
@@ -319,7 +315,7 @@
 		<dl class="fa">
 			<dt>numpy array examples in Jupyter Notebook:</dt>
 			<dd><a href="examples/numpy/NDArrays.html">See as html</a></dd>
-			<dd>Or play online (if you have Google Account), or download the notebook: <a href="https://drive.google.com/file/d/15rB08uVo-LVdcmPjqbnTnRiGW10_HAv2/view?usp=sharing">NDArrays.ipynb</a></dd>
+			<dd>Or play online at google colab:<a href="https://colab.research.google.com/drive/15rB08uVo-LVdcmPjqbnTnRiGW10_HAv2">NDArrays.ipynb</a></dd>
 		</dl>
 	</section>
 	<section><h3>References</h3>
@@ -338,18 +334,6 @@
 			<dt>pandas is great for data analysis and modeling</dt>
 			<dt>pandas combined with the IPython toolkit and other libraries creates environment for doing data analysis in Python, which excels in performance, productivity, and the ability to collaborate.</dt>
 		</dl>
-	</section>
-	<section><h3>Install</h3>
-		<pre><code rel="Terminal" class="shell" data-noescape>
-			#install pandas with pip
-			$ pip install pandas
-
-			#install pandas on pipenv
-			$ pipenv install pandas
-
-			# install pandas on conda
-			conda install pandas
-		</code></pre>
 	</section>
 	<section><h3>Pandas Data Structures</h3>
 		<p style="font-size: 1.5em">The two primary data structures in pandas are <span class="note">Series</span> and <span class="note">DataFrame</span>.</p>
@@ -520,7 +504,7 @@
 		<dl class="fa">
 			<dt>Examples as HTML: <a href="examples/pandas/Series/Series.html">Series.html</a></dt>
 			<dt>Examples as ipynb: <a href="examples/pandas/Series/Series.ipynb">Series.ipynb</a></dt>
-			<dt>Examples as ipynb on Google Colab: <a href="https://drive.google.com/file/d/1_Y21Ri_8nWVHu0PuDF5ammpPSD0Tduw2/view?usp=sharing">Series.ipynb on Google Colab</a></dt>
+			<dt>Examples as ipynb on Google Colab: <a href="https://colab.research.google.com/drive/1_Y21Ri_8nWVHu0PuDF5ammpPSD0Tduw2">Series.ipynb on Google Colab</a></dt>
 		</dl>
 	</section>
 	<section><h3>References</h3>
@@ -542,37 +526,33 @@
 	<section><h3>Create DataFrame from a single Series object.</h3>
 		<dl class="fa">
 			<dt>A DataFrame is a collection of Series objects, and a single-column DataFrame can be constructed from a single Series.</dt>
-		</dl>
-		<pre><code rel="Python" class="python" style="width: 90%; font-size: .9em;">
-			# create Series Object:
-			prices_ds = pd.Series([1.5, 2, 2.5, 3],
-									index=["apples", "oranges", "bananas", "strawberries"])
+			<pre><code rel="Python" class="python">
+				# create Series Object:
+				prices_ds = pd.Series([1.5, 2, 2.5, 3],
+										index=["apples", "oranges", "bananas", "strawberries"])
 
-			# create DataFrame Object from prices Series:
-			prices_df = pd.DataFrame(prices_ds)
-			print(prices_df)
+				# create DataFrame Object from prices Series:
+				prices_df = pd.DataFrame(prices_ds)
+				print(prices_df)
 
-			#                0
-			#apples        1.5
-			#oranges       2.0
-			#bananas       2.5
-			#strawberries  3
-		</code></pre>
-	</section>
-	<section><h3>Create DataFrame from a single Series object.</h3>
-		<dl class="fa">
+				#                0
+				#apples        1.5
+				#oranges       2.0
+				#bananas       2.5
+				#strawberries  3
+			</code></pre>
 			<dt>We can pass columns names, instead of defaults</dt>
+			<pre><code rel="Python" class="python">
+				# create DataFrame Object from prices Series:
+				prices_df = pd.DataFrame(prices_ds,columns=["prices"])
+				print(prices_df)
+				#              prices
+				#apples           1.5
+				#oranges          2.0
+				#bananas          2.5
+				#strawberries     3.0
+			</code></pre>
 		</dl>
-		<pre><code rel="Python" class="python" style="width: 90%; font-size: .9em;">
-			# create DataFrame Object from prices Series:
-			prices_df = pd.DataFrame(prices_ds,columns=["prices"])
-			print(prices_df)
-			#              prices
-			#apples           1.5
-			#oranges          2.0
-			#bananas          2.5
-			#strawberries     3.0
-		</code></pre>
 	</section>
 	<section><h3>Create DataFrame from a dictionary of Series object.</h3>
 		<dl class="fa">
@@ -644,6 +624,12 @@
 	</section>
 </section>
 
+<section data-min="50"><h1>Processing various file formats with pandas</h1></section>
+<section><h2>Processing various file formats with pandas</h2>
+	<section><h3>CSV & text files</h3>
+	</section>
+</section>
+
 <section><h1>DataFrames Manipulations</h1></section>
 <section><h2>DataFrames Manipulations</h2>
 	<dl class="fa">
@@ -652,15 +638,15 @@
 	</dl>
 </section>
 
-<section><h1 class="advanced">DataFrames Merge (aka SQL Join)</h1></section>
-<section><h2>DataFrames Merge</h2>
+<section><h1>DataFrames Merge (aka SQL Join)</h1></section>
+<section><h2 class="advanced">DataFrames Merge</h2>
 	<section><h3>Overview</h3>
 		<dl class="fa">
 			<dt class="note"><code>merge</code> method in pandas is analogues to SQL <code>join</code> operation!</dt>
 			<dt>merge is the entry point for all standard database join operations between DataFrame objects:</dt>
 			<dt>The related <code>DataFrame.join</code> method, uses merge internally for the index-on-index (by default) and column(s)-on-index join.</dt>
 		</dl>
-		<a href="images/SQL_join_as_sets.jpg"><img src="images/SQL_join_as_sets.jpg"></a>
+		<a href="images/SQL_join_as_sets.jpg"><img src="images/SQL_join_as_sets.jpg" style="height: 30vh;"></a>
 	</section>
 	<section><h3>Syntax</h3>
 		<pre><code rel="Syntax" class="shell" data-noescape style="font-size: .9em">
