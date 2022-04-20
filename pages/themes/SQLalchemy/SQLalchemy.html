@@ -402,16 +402,12 @@
 
 <section data-min="20"><h1>Pandas and DB</h1></section>
 <section><h2>Pandas and DB</h2>
-  <section><h3>DataFrame from MySQL table</h3>
-    <pre><code rel="Python" class="python">
-      import MySQLdb
-      mysql_cn= MySQLdb.connect(host='myhost',
-                      port=3306,user='myusername', passwd='mypassword',
-                      db='information_schema')
-      df_mysql = pd.read_sql('select * from VIEWS;', con=mysql_cn)
-      print 'loaded dataframe from MySQL. records:', len(df_mysql)
-      mysql_cn.close()
-    </code></pre>
+  <section><h3>Read/Write DataFrame from SQL with SQLAlchemy</h3>
+    <dl class="fa">
+		<dt>Examples and notes are given in next Jupyter Notebook:</dt>
+		<dd>Download: <a href="./examples/slides/DF_and_SQL.ipynb">DF_and_SQL.ipynb</a></dd>
+		<dd>View: <a href="https://nbviewer.org/github/WWWCourses/ProgressBG-Python-UniCredit-Slides/blob/main/pages/themes/SQLalchemy/examples/slides/DF_and_SQL.ipynb">DF_and_SQL.ipynb</a></dd>
+	</dl>
   </section>
 </section>
 
