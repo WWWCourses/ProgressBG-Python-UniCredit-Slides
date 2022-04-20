@@ -27,7 +27,7 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `employee` VALUES (1,'Ivan Petrov');
 INSERT INTO `employee` VALUES (2,'Maria Popova');
-INSERT INTO `employee` VALUES (3,'Asen Asenov');
+INSERT INTO `employee` VALUES (3,'Georgi Ivanov');
 
 CREATE TABLE `company_employee` (
   `employee_id` int(11) NOT NULL,
@@ -40,6 +40,8 @@ CREATE TABLE `company_employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `company_employee` VALUES (1,2);
 INSERT INTO `company_employee` VALUES (2,1);
+INSERT INTO `company_employee` VALUES (3,1);
+INSERT INTO `company_employee` VALUES (3,2);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 
